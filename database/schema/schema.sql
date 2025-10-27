@@ -1,256 +1,156 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Oct 26, 2025 at 03:39 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- High Street Gym - Database Schema
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+-- Table: users
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `highstreetgym`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bookings`
---
-
-CREATE TABLE `bookings` (
-  `booking_id` int(11) NOT NULL,
-  `member_id` int(11) NOT NULL,
-  `schedule_id` int(11) NOT NULL,
-  `booking_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` enum('confirmed','cancelled','completed','no_show') DEFAULT 'confirmed',
-  `notes` text DEFAULT NULL,
-  `cancelled_at` timestamp NULL DEFAULT NULL,
-  `cancellation_reason` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+CREATE TABLE `users` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(50) NOT NULL,
+  `last_name` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `password_hash` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(20) DEFAULT NULL,
+  `user_type` ENUM('member', 'admin') DEFAULT 'member',
+  `status` ENUM('active', 'inactive') DEFAULT 'active',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `classes`
---
-
-CREATE TABLE `classes` (
-  `class_id` int(11) NOT NULL,
-  `class_name` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL,
-  `duration` int(11) NOT NULL COMMENT 'Duration in minutes',
-  `difficulty_level` enum('beginner','intermediate','advanced','all_levels') DEFAULT 'all_levels',
-  `max_capacity` int(11) DEFAULT 20,
-  `equipment_needed` text DEFAULT NULL,
-  `photo_url` varchar(255) DEFAULT NULL,
-  `status` enum('active','inactive') DEFAULT 'active',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `members`
---
-
-CREATE TABLE `members` (
-  `member_id` int(11) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `date_of_birth` date DEFAULT NULL,
-  `join_date` date NOT NULL,
-  `membership_type` enum('basic','standard','premium') DEFAULT 'basic',
-  `membership_expiry` date DEFAULT NULL,
-  `emergency_contact_name` varchar(100) DEFAULT NULL,
-  `emergency_contact_phone` varchar(20) DEFAULT NULL,
-  `status` enum('active','inactive','suspended') DEFAULT 'active',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `schedules`
---
-
-CREATE TABLE `schedules` (
-  `schedule_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
-  `trainer_id` int(11) NOT NULL,
-  `schedule_date` date NOT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
-  `room_location` varchar(50) DEFAULT NULL,
-  `available_spots` int(11) DEFAULT NULL,
-  `status` enum('scheduled','completed','cancelled') DEFAULT 'scheduled',
-  `notes` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `trainers`
---
+-- Table: trainers
 
 CREATE TABLE `trainers` (
-  `trainer_id` int(11) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `specialization` varchar(100) DEFAULT NULL,
-  `bio` text DEFAULT NULL,
-  `photo_url` varchar(255) DEFAULT NULL,
-  `hire_date` date DEFAULT NULL,
-  `status` enum('active','inactive','on_leave') DEFAULT 'active',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `trainer_id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(50) NOT NULL,
+  `last_name` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `specialization` VARCHAR(100) DEFAULT NULL,
+  `status` ENUM('active', 'inactive') DEFAULT 'active',
+  PRIMARY KEY (`trainer_id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- Table: classes
 
---
--- Table structure for table `xml_imports`
---
+CREATE TABLE `classes` (
+  `class_id` INT NOT NULL AUTO_INCREMENT,
+  `class_name` VARCHAR(100) NOT NULL,
+  `description` TEXT DEFAULT NULL,
+  `duration` INT NOT NULL COMMENT 'Duration in minutes',
+  `difficulty_level` ENUM('beginner', 'intermediate', 'advanced', 'all_levels') DEFAULT 'all_levels',
+  PRIMARY KEY (`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Table: schedules
+
+CREATE TABLE `schedules` (
+  `schedule_id` INT NOT NULL AUTO_INCREMENT,
+  `class_id` INT NOT NULL,
+  `trainer_id` INT NOT NULL,
+  `day_of_week` ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
+  `start_time` TIME NOT NULL,
+  `end_time` TIME NOT NULL,
+  `max_capacity` INT DEFAULT 20,
+  PRIMARY KEY (`schedule_id`),
+  KEY `class_id` (`class_id`),
+  KEY `trainer_id` (`trainer_id`),
+  CONSTRAINT `schedules_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classes` (`class_id`) ON DELETE CASCADE,
+  CONSTRAINT `schedules_ibfk_2` FOREIGN KEY (`trainer_id`) REFERENCES `trainers` (`trainer_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Table: bookings
+
+CREATE TABLE `bookings` (
+  `booking_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `schedule_id` INT NOT NULL,
+  `booking_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `status` ENUM('confirmed', 'cancelled') DEFAULT 'confirmed',
+  PRIMARY KEY (`booking_id`),
+  UNIQUE KEY `unique_booking` (`user_id`, `schedule_id`),
+  KEY `user_id` (`user_id`),
+  KEY `schedule_id` (`schedule_id`),
+  CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Table: blog_posts
+
+CREATE TABLE `blog_posts` (
+  `post_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `title` VARCHAR(200) NOT NULL,
+  `message` TEXT NOT NULL,
+  `post_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`post_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `blog_posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Table: xml_imports
 
 CREATE TABLE `xml_imports` (
-  `import_id` int(11) NOT NULL,
-  `import_type` enum('members','trainers','classes','schedules') NOT NULL,
-  `file_name` varchar(255) DEFAULT NULL,
-  `records_processed` int(11) DEFAULT 0,
-  `records_succeeded` int(11) DEFAULT 0,
-  `records_failed` int(11) DEFAULT 0,
-  `import_status` enum('processing','completed','failed') DEFAULT 'processing',
-  `error_log` text DEFAULT NULL,
-  `imported_by` varchar(50) DEFAULT NULL,
-  `imported_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `import_id` INT NOT NULL AUTO_INCREMENT,
+  `import_type` ENUM('classes', 'trainers', 'users') NOT NULL,
+  `file_name` VARCHAR(255) DEFAULT NULL,
+  `records_imported` INT DEFAULT 0,
+  `import_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `status` ENUM('success', 'failed') DEFAULT 'success',
+  PRIMARY KEY (`import_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Indexes for dumped tables
---
+-- Sample Data for Testing
 
---
--- Indexes for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`booking_id`),
-  ADD UNIQUE KEY `unique_booking` (`member_id`,`schedule_id`),
-  ADD KEY `idx_member_bookings` (`member_id`),
-  ADD KEY `idx_schedule_bookings` (`schedule_id`);
+-- Sample trainers
+INSERT INTO `trainers` (`first_name`, `last_name`, `email`, `specialization`, `status`) VALUES
+('Sarah', 'Johnson', 'sarah.johnson@highstreetgym.com.au', 'Yoga & Pilates', 'active'),
+('Mike', 'Chen', 'mike.chen@highstreetgym.com.au', 'Strength Training', 'active'),
+('Emma', 'Williams', 'emma.williams@highstreetgym.com.au', 'HIIT & Cardio', 'active');
 
---
--- Indexes for table `classes`
---
-ALTER TABLE `classes`
-  ADD PRIMARY KEY (`class_id`);
+-- Sample classes
+INSERT INTO `classes` (`class_name`, `description`, `duration`, `difficulty_level`) VALUES
+('Yoga Flow', 'Gentle flowing yoga for flexibility and relaxation', 60, 'all_levels'),
+('Pilates Core', 'Core strengthening pilates workout', 45, 'intermediate'),
+('HIIT Burn', 'High intensity interval training', 30, 'advanced'),
+('Indoor Cycling', 'Cardio cycling workout', 45, 'all_levels'),
+('Boxing Fitness', 'Boxing-based fitness class', 60, 'intermediate'),
+('Abs Blast', 'Targeted abdominal workout', 30, 'all_levels'),
+('Zumba', 'Dance fitness workout', 60, 'beginner');
 
---
--- Indexes for table `members`
---
-ALTER TABLE `members`
-  ADD PRIMARY KEY (`member_id`),
-  ADD UNIQUE KEY `email` (`email`);
+-- Sample schedule (weekly timetable)
+INSERT INTO `schedules` (`class_id`, `trainer_id`, `day_of_week`, `start_time`, `end_time`, `max_capacity`) VALUES
+-- Monday
+(1, 1, 'Monday', '06:00:00', '07:00:00', 15),
+(3, 3, 'Monday', '08:00:00', '08:30:00', 20),
+(5, 2, 'Monday', '18:00:00', '19:00:00', 15),
+-- Tuesday
+(2, 1, 'Tuesday', '07:00:00', '07:45:00', 12),
+(4, 3, 'Tuesday', '17:30:00', '18:15:00', 25),
+(7, 1, 'Tuesday', '19:00:00', '20:00:00', 20),
+-- Wednesday
+(1, 1, 'Wednesday', '06:00:00', '07:00:00', 15),
+(6, 2, 'Wednesday', '12:00:00', '12:30:00', 20),
+(3, 3, 'Wednesday', '18:00:00', '18:30:00', 20),
+-- Thursday
+(2, 1, 'Thursday', '07:00:00', '07:45:00', 12),
+(5, 2, 'Thursday', '18:00:00', '19:00:00', 15),
+-- Friday
+(4, 3, 'Friday', '06:30:00', '07:15:00', 25),
+(7, 1, 'Friday', '17:00:00', '18:00:00', 20),
+-- Saturday
+(1, 1, 'Saturday', '08:00:00', '09:00:00', 15),
+(3, 3, 'Saturday', '09:30:00', '10:00:00', 20),
+(6, 2, 'Saturday', '10:30:00', '11:00:00', 20);
 
---
--- Indexes for table `schedules`
---
-ALTER TABLE `schedules`
-  ADD PRIMARY KEY (`schedule_id`),
-  ADD KEY `trainer_id` (`trainer_id`),
-  ADD KEY `idx_schedule_date` (`schedule_date`),
-  ADD KEY `idx_class_trainer` (`class_id`,`trainer_id`);
+-- Sample admin user (password: Admin123!)
+INSERT INTO `users` (`first_name`, `last_name`, `email`, `password_hash`, `phone`, `user_type`, `status`) VALUES
+('Admin', 'User', 'admin@highstreetgym.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0400000000', 'admin', 'active');
 
---
--- Indexes for table `trainers`
---
-ALTER TABLE `trainers`
-  ADD PRIMARY KEY (`trainer_id`),
-  ADD UNIQUE KEY `email` (`email`);
+-- Sample member (password: Member123!)
+INSERT INTO `users` (`first_name`, `last_name`, `email`, `password_hash`, `phone`, `user_type`, `status`) VALUES
+('John', 'Smith', 'john.smith@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0412345678', 'member', 'active');
 
---
--- Indexes for table `xml_imports`
---
-ALTER TABLE `xml_imports`
-  ADD PRIMARY KEY (`import_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `bookings`
---
-ALTER TABLE `bookings`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `classes`
---
-ALTER TABLE `classes`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `members`
---
-ALTER TABLE `members`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `schedules`
---
-ALTER TABLE `schedules`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `trainers`
---
-ALTER TABLE `trainers`
-  MODIFY `trainer_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `xml_imports`
---
-ALTER TABLE `xml_imports`
-  MODIFY `import_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `schedules`
---
-ALTER TABLE `schedules`
-  ADD CONSTRAINT `schedules_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classes` (`class_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `schedules_ibfk_2` FOREIGN KEY (`trainer_id`) REFERENCES `trainers` (`trainer_id`) ON DELETE CASCADE;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
