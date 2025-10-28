@@ -3,7 +3,7 @@
 //database connection details
 $servername = "localhost";
 $username = "connect_hsg";
-$password = ""HighStreetGym1!;
+$password = "HighStreetGym1!";
 $database = "highstreetgym";
 
 //connect to the database

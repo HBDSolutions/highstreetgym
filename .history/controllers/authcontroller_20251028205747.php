@@ -115,7 +115,7 @@ function require_login($redirectUrl = null) {
 
 // Get current logged in user data
 
-function get_logged_in_user() {
+function get_current_user() {
     global $conn;
     
     if (!is_logged_in()) {

@@ -22,27 +22,46 @@ function get_weekly_schedule($conn) {
                     t.first_name AS trainer_first_name,
                     t.last_name AS trainer_last_name,
                     t.specialization,
-                    (SELECT COUNT(*) FROM bookings WHERE schedule_id = s.schedule_id AND status = 'confirmed') AS current_bookings
+                    COUNT(b.booking_id) AS current_bookings
                 FROM schedules s
                 INNER JOIN classes c ON s.class_id = c.class_id
                 INNER JOIN trainers t ON s.trainer_id = t.trainer_id
+                LEFT JOIN bookings b ON b.schedule_id = s.schedule_id
+                GROUP BY 
+                    s.schedule_id,
+                    s.day_of_week,
+                    s.start_time,
+                    s.end_time,
+                    s.max_capacity,
+                    c.class_id,
+                    c.class_name,
+                    c.description,
+                    c.duration,
+                    c.difficulty_level,
+                    t.trainer_id,
+                    t.first_name,
+                    t.last_name,
+                    t.specialization
+                ORDER BY 
+                    FIELD(s.day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'),
+                    s.start_time;
+                    s.day_of_week,
+                    s.start_time,
+                    s.end_time,
+                    s.max_capacity,
+                    c.class_id,
+                    c.class_name,
+                    c.description,
+                    c.duration,
+                    c.difficulty_level,
+                    t.trainer_id,
+                    t.first_name,
+                    t.last_name,
+                    t.specialization
                 ORDER BY 
                     FIELD(s.day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'),
                     s.start_time";
-        
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $schedule = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
-        
-        return $schedule;
-        
-    } catch (PDOException $e) {
-        return [];
     }
-}
-
-// Get schedule by day of week
 
 function get_schedule_by_day($conn, $dayOfWeek) {
     try {
@@ -61,9 +80,41 @@ function get_schedule_by_day($conn, $dayOfWeek) {
                     t.first_name AS trainer_first_name,
                     t.last_name AS trainer_last_name,
                     t.specialization,
-                    (SELECT COUNT(*) FROM bookings WHERE schedule_id = s.schedule_id AND status = 'confirmed') AS current_bookings
+                    COUNT(b.booking_id) AS current_bookings
                 FROM schedules s
                 INNER JOIN classes c ON s.class_id = c.class_id
+                INNER JOIN trainers t ON s.trainer_id = t.trainer_id
+                LEFT JOIN bookings b ON b.schedule_id = s.schedule_id AND b.status = 'confirmed'
+                WHERE s.day_of_week = :day_of_week
+                GROUP BY 
+                    s.schedule_id,
+                    s.day_of_week,
+                    s.start_time,
+                    s.end_time,
+                    s.max_capacity,
+                    c.class_id,
+                    c.class_name,
+                    c.description,
+                    c.duration,
+                    c.difficulty_level,
+                    t.trainer_id,
+                    t.first_name,
+                    t.last_name,
+                    t.specialization
+                ORDER BY s.start_time";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':day_of_week', $dayOfWeek);
+        $stmt->execute();
+        $schedule = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        
+        return $schedule;
+        
+    } catch (PDOException $e) {
+        return [];
+    }
+}
                 INNER JOIN trainers t ON s.trainer_id = t.trainer_id
                 WHERE s.day_of_week = :day_of_week
                 ORDER BY s.start_time";

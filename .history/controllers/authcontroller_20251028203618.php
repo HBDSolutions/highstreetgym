@@ -56,7 +56,7 @@ function handle_login() {
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
         
-        // Call user login function
+        // Call uder login function
         $result = login_user($conn, $email, $password);
         
         if ($result['success']) {
@@ -115,7 +115,7 @@ function require_login($redirectUrl = null) {
 
 // Get current logged in user data
 
-function get_logged_in_user() {
+function get_current_user() {
     global $conn;
     
     if (!is_logged_in()) {
