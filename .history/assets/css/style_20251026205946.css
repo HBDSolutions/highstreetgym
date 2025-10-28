@@ -1,0 +1,106 @@
+/* === High Street Gym Custom Theme === */
+:root {
+  /* Base brand palette */
+  --hsg-primary:   #EF8354;
+  --hsg-secondary: #4F5D75;
+  --hsg-muted:     #BFC0C0;
+  --hsg-dark:      #2D3142;
+  --hsg-light:     #FFFFFF;
+
+  /* Bootstrap variable overrides */
+  --bs-body-bg: var(--hsg-light);
+  --bs-body-color: var(--hsg-dark);
+  --bs-primary: var(--hsg-primary);
+  --bs-secondary: var(--hsg-secondary);
+  --bs-success: #2ECC71;
+  --bs-danger:  #E74C3C;
+  --bs-warning: #F1C40F;
+  --bs-info:    #3498DB;
+  --bs-border-radius: .5rem;
+  --bs-font-sans-serif: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* === Global layout === */
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: var(--hsg-dark);
+}
+
+/* === Navbar === */
+.navbar {
+  background-color: var(--hsg-dark) !important;
+  .navbar .navbar-brand { ... }
+.navbar .nav-link { ... }
+}
+.navbar .navbar-brand {
+  color: var(--hsg-primary) !important;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+.navbar .nav-link {
+  color: var(--hsg-light) !important;
+  margin-right: 1rem;
+  transition: color .2s ease-in-out;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--hsg-primary) !important;
+  text-decoration: underline;
+}
+
+/* === Main container card === */
+main.container {
+  background: var(--hsg-light);
+  padding: 2rem;
+  border-radius: var(--bs-border-radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* === Buttons === */
+.btn-primary {
+  background-color: var(--hsg-primary);
+  border-color: var(--hsg-primary);
+}
+.btn-primary:hover {
+  background-color: var(--hsg-secondary);
+  border-color: var(--hsg-secondary);
+}
+
+/* === Tables === */
+.table {
+  color: var(--hsg-dark);
+  border-color: var(--hsg-muted);
+}
+.table thead {
+  background-color: var(--hsg-secondary);
+  color: var(--hsg-light);
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+/* === Footer === */
+footer {
+  background-color: var(--hsg-dark);
+  color: var(--hsg-light);
+  text-align: center;
+  padding: 1rem 0;
+}
+footer small {
+  color: var(--hsg-muted);
+}
+
+/* === Utility tweaks === */
+a { color: var(--hsg-primary); }
+a:hover { color: var(--hsg-secondary); }
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid var(--hsg-muted);
+}

@@ -1,0 +1,397 @@
+/* === High Street Gym Custom Theme === */
+:root {
+  /* Base brand palette */
+  --hsg-primary:   #EF8354;
+  --hsg-secondary: #4F5D75;
+  --hsg-muted:     #BFC0C0;
+  --hsg-dark:      #2D3142;
+  --hsg-light:     #FFFFFF;
+
+  /* Bootstrap variable overrides */
+  --bs-body-bg: var(--hsg-light);
+  --bs-body-color: var(--hsg-dark);
+  --bs-primary: var(--hsg-primary);
+  --bs-secondary: var(--hsg-secondary);
+  --bs-success: #2ECC71;
+  --bs-danger:  #E74C3C;
+  --bs-warning: #F1C40F;
+  --bs-info:    #3498DB;
+  --bs-border-radius: .5rem;
+  --bs-font-sans-serif: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* === Global layout === */
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: var(--hsg-dark);
+}
+
+/* === Navbar === */
+.navbar {
+  background-color: var(--hsg-dark) !important;
+}
+.navbar .navbar-brand {
+  color: var(--hsg-primary) !important;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+.navbar .nav-link {
+  color: var(--hsg-light) !important;
+  margin-right: 1rem;
+  transition: color .2s ease-in-out;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--hsg-primary) !important;
+  text-decoration: underline;
+}
+
+/* === Main container card === */
+main.container {
+  background: var(--hsg-light);
+  padding: 2rem;
+  border-radius: var(--bs-border-radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* === Buttons === */
+.btn-primary {
+  background-color: var(--hsg-primary);
+  border-color: var(--hsg-primary);
+}
+.btn-primary:hover {
+  background-color: var(--hsg-secondary);
+  border-color: var(--hsg-secondary);
+}
+
+/* === Tables === */
+.table {
+  color: var(--hsg-dark);
+  border-color: var(--hsg-muted);
+}
+.table thead {
+  background-color: var(--hsg-secondary);
+  color: var(--hsg-light);
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+/* === Footer === */
+footer {
+  background-color: var(--hsg-dark);
+  color: var(--hsg-light);
+  text-align: center;
+  padding: 1rem 0;
+}
+footer small {
+  color: var(--hsg-muted);
+}
+
+/* === Utility tweaks === */
+a { color: var(--hsg-primary); }
+a:hover { color: var(--hsg-secondary); }
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid var(--hsg-muted);
+}
+
+/* ========================================== */
+/* === AUTHENTICATION PAGES === */
+/* ========================================== */
+
+/* Auth page background */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--hsg-primary) 0%, var(--hsg-secondary) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background pattern */
+.auth-page::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+  animation: rotate 60s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Auth container - uses Bootstrap card styling */
+.auth-container {
+  background: var(--hsg-light);
+  padding: 2.5rem;
+  border-radius: var(--bs-border-radius);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Brand/Logo section */
+.auth-brand {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-brand-icon {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.auth-brand h1 {
+  color: var(--hsg-primary);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.auth-brand p {
+  color: var(--hsg-muted);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* Form inputs - enhance Bootstrap forms */
+.auth-container .form-label {
+  font-weight: 600;
+  color: var(--hsg-dark);
+  margin-bottom: 0.5rem;
+}
+
+.auth-container .form-label .required {
+  color: var(--bs-danger);
+  margin-left: 2px;
+}
+
+.auth-container .form-control {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--hsg-muted);
+  border-radius: var(--bs-border-radius);
+  transition: all 0.3s ease;
+}
+
+.auth-container .form-control:focus {
+  border-color: var(--hsg-primary);
+  box-shadow: 0 0 0 0.2rem rgba(239, 131, 84, 0.25);
+}
+
+.auth-container .form-control.is-invalid {
+  border-color: var(--bs-danger);
+}
+
+/* Input groups with icons */
+.input-icon-group {
+  position: relative;
+}
+
+.input-icon-group .input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--hsg-muted);
+  pointer-events: none;
+}
+
+.input-icon-group .form-control {
+  padding-left: 3rem;
+}
+
+/* Password strength indicator */
+.password-strength {
+  height: 4px;
+  background: var(--hsg-muted);
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.password-strength-bar {
+  height: 100%;
+  width: 0%;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.password-strength-bar.weak {
+  width: 33%;
+  background: var(--bs-danger);
+}
+
+.password-strength-bar.medium {
+  width: 66%;
+  background: var(--bs-warning);
+}
+
+.password-strength-bar.strong {
+  width: 100%;
+  background: var(--bs-success);
+}
+
+/* Error messages - enhance Bootstrap invalid-feedback */
+.invalid-feedback {
+  display: none;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.invalid-feedback.show {
+  display: block;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Alert messages - enhance Bootstrap alerts */
+.auth-container .alert {
+  border-radius: var(--bs-border-radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Submit button */
+.auth-container .btn-primary {
+  width: 100%;
+  padding: 0.875rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.auth-container .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 131, 84, 0.3);
+}
+
+.auth-container .btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Auth links (register/login toggle) */
+.auth-links {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hsg-muted);
+  color: var(--hsg-dark);
+}
+
+.auth-links a {
+  color: var(--hsg-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-links a:hover {
+  color: var(--hsg-secondary);
+  text-decoration: underline;
+}
+
+/* Form rows for side-by-side inputs */
+.auth-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .auth-container {
+    padding: 1.5rem;
+  }
+  
+  .auth-form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .auth-brand h1 {
+    font-size: 1.5rem;
+  }
+  
+  .auth-brand-icon {
+    font-size: 3rem;
+  }
+}
+
+/* Loading spinner for async operations */
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  right: 1rem;
+  margin-top: -8px;
+  border: 2px solid transparent;
+  border-top-color: var(--hsg-light);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
