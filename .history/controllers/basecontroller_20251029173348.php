@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Include required models
 require_once __DIR__ . '/../models/database.php';
 require_once __DIR__ . '/../models/session.php';
-require_once __DIR__ . '/../models/user_functions.php';
+require_once __DIR__ . '/../models/user_functions.php';  // ✅ ADDED: Include user functions
 
 // USER AUTHENTICATION STATE
 
@@ -50,7 +50,7 @@ $loginModalContext = [
     'successMessageText' => '',
     'showCardWrapper' => false,
     'showRegisterLink' => false,
-    'formAction' => '/highstreetgym/controllers/login.php',
+    'formAction' => '/highstreetgym/controllers/login.php',  // ✅ FIXED: Absolute path
     'previousEmail' => '',
     'redirectUrl' => ''
 ];
