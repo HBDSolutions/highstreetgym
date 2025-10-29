@@ -174,13 +174,39 @@ $previousData = $registerFormContext['previousData'] ?? [];
         'use strict';
         
         const form = document.getElementById('registerForm');
+        const password = document.getElementById('password');
+        const passwordConfirm = document.getElementById('password_confirm');
         
+        // Password match validation function
+        function checkPasswordMatch() {
+            if (password.value && passwordConfirm.value) {
+                if (password.value === passwordConfirm.value) {
+                    passwordConfirm.setCustomValidity('');
+                } else {
+                    passwordConfirm.setCustomValidity('Passwords must match');
+                }
+            }
+        }
+        
+        // Listen for changes on both password fields
+        if (password && passwordConfirm) {
+            password.addEventListener('input', checkPasswordMatch);
+            passwordConfirm.addEventListener('input', checkPasswordMatch);
+            passwordConfirm.addEventListener('blur', checkPasswordMatch);
+        }
+        
+        // Form validation on submit
         if (form) {
             form.addEventListener('submit', function(event) {
+                // Final password match check
+                checkPasswordMatch();
+                
+                // Check overall form validity
                 if (!form.checkValidity()) {
                     event.preventDefault();
                     event.stopPropagation();
                 }
+                
                 form.classList.add('was-validated');
             }, false);
         }

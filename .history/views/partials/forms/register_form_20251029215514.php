@@ -148,7 +148,9 @@ $previousData = $registerFormContext['previousData'] ?? [];
     </div>
 
     <div class="d-grid">
-        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-person-plus"></i> Register
+        </button>
     </div>
 </form>
 
@@ -174,6 +176,17 @@ $previousData = $registerFormContext['previousData'] ?? [];
         'use strict';
         
         const form = document.getElementById('registerForm');
+        const password = document.getElementById('password');
+        const passwordConfirm = document.getElementById('password_confirm');
+        
+        // Password match validation
+        passwordConfirm.addEventListener('input', function() {
+            if (password.value !== passwordConfirm.value) {
+                passwordConfirm.setCustomValidity('Passwords must match');
+            } else {
+                passwordConfirm.setCustomValidity('');
+            }
+        });
         
         if (form) {
             form.addEventListener('submit', function(event) {

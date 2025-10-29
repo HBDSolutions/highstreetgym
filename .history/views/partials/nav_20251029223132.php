@@ -12,7 +12,7 @@
                     <a class="nav-link <?= is_active('index.php') ?>" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= is_active('classes.php') ?>" href="/highstreetgym/controllers/classescontroller.php">Classes</a>
+                    <a class="nav-link <?= is_active('classes.php') ?>" href="/highstreetgym/controllers/classes.php">Classes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= is_active('blog.php') ?>" href="controllers/blog.php">Blog</a>

@@ -174,9 +174,30 @@ $previousData = $registerFormContext['previousData'] ?? [];
         'use strict';
         
         const form = document.getElementById('registerForm');
+        const password = document.getElementById('password');
+        const passwordConfirm = document.getElementById('password_confirm');
         
+        // Password match validation
+        function validatePasswordMatch() {
+            if (passwordConfirm.value && password.value !== passwordConfirm.value) {
+                passwordConfirm.setCustomValidity('Passwords must match');
+                return false;
+            } else {
+                passwordConfirm.setCustomValidity('');
+                return true;
+            }
+        }
+        
+        // Check on input
+        password.addEventListener('input', validatePasswordMatch);
+        passwordConfirm.addEventListener('input', validatePasswordMatch);
+        
+        // Form submission
         if (form) {
             form.addEventListener('submit', function(event) {
+                // Re-validate password match on submit
+                validatePasswordMatch();
+                
                 if (!form.checkValidity()) {
                     event.preventDefault();
                     event.stopPropagation();

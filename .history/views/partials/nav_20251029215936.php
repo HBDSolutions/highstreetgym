@@ -12,7 +12,7 @@
                     <a class="nav-link <?= is_active('index.php') ?>" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= is_active('classes.php') ?>" href="/highstreetgym/controllers/classescontroller.php">Classes</a>
+                    <a class="nav-link <?= is_active('classes.php') ?>" href="controllers/classes.php">Classes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= is_active('blog.php') ?>" href="controllers/blog.php">Blog</a>
@@ -53,14 +53,20 @@
                 <?php else: ?>
                     <!-- Not Logged In - Account Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> Account
+                        </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
                             <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    <i class="bi bi-box-arrow-in-right"></i> Login
+                                </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item" href="controllers/register.php">Register</a>
+                                <a class="dropdown-item" href="controllers/register.php">
+                                    <i class="bi bi-person-plus"></i> Register
+                                </a>
                             </li>
                         </ul>
                     </li>
