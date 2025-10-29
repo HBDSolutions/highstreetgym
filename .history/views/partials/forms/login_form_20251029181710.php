@@ -82,7 +82,9 @@ $redirectUrl = $loginFormContext['redirectUrl'] ?? '';
     <input type="hidden" name="action" value="login">
 
     <div class="d-grid">
-        <button type="submit" class="btn btn-primary btn-lg">Login</button>
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-box-arrow-in-right"></i> Login
+        </button>
     </div>
 </form>
 

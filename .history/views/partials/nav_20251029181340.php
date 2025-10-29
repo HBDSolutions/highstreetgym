@@ -54,13 +54,17 @@
                     <!-- Not Logged In Menu -->
                     <?php if ($showLoginButton): ?>
                         <li class="nav-item">
-                            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Login
+                            </button>
                         </li>
                     <?php endif; ?>
                     
                     <?php if ($showRegisterButton): ?>
                         <li class="nav-item ms-2">
-                            <a href="controllers/register.php" class="btn btn-primary">Register</a>
+                            <a href="controllers/register.php" class="btn btn-primary">
+                                <i class="bi bi-person-plus"></i> Register
+                            </a>
                         </li>
                     <?php endif; ?>
                 <?php endif; ?>

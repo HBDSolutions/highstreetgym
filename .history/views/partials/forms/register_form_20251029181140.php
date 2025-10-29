@@ -19,7 +19,9 @@ $previousData = $registerFormContext['previousData'] ?? [];
                 <div class="card-body p-4">
 <?php endif; ?>
 
-<h2 class="<?= $showCardWrapper ? 'card-title text-center mb-4' : 'mb-3' ?>">Member Registration</h2>
+<h2 class="<?= $showCardWrapper ? 'card-title text-center mb-4' : 'mb-3' ?>">
+    <i class="bi bi-person-plus"></i> Member Registration
+</h2>
 
 <!-- General Error Alert -->
 <?php if ($showErrorAlert): ?>
@@ -149,7 +151,9 @@ $previousData = $registerFormContext['previousData'] ?? [];
     </div>
 
     <div class="d-grid">
-        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-person-plus"></i> Register
+        </button>
     </div>
 </form>
 

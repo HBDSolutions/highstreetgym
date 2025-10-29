@@ -149,7 +149,9 @@ $previousData = $registerFormContext['previousData'] ?? [];
     </div>
 
     <div class="d-grid">
-        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-person-plus"></i> Register
+        </button>
     </div>
 </form>
 
