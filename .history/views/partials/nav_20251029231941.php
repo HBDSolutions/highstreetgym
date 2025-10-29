@@ -39,7 +39,9 @@
                     <?php endif; ?>
                     
                     <li class="nav-item">
-                        <span class="nav-link text-white">Hello, <?= htmlspecialchars($userName) ?></span>
+                        <span class="nav-link text-white">
+                            <i class="bi bi-person-circle"></i> Hello, <?= htmlspecialchars($userName) ?>
+                        </span>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="controllers/logout.php">
