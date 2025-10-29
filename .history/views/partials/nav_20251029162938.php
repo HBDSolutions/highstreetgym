@@ -12,6 +12,11 @@ if (session_status() === PHP_SESSION_NONE) {
 // Get modal-specific error from session
 $modalLoginError = $_SESSION['modal_login_error'] ?? null;
 unset($_SESSION['modal_login_error']);
+
+// Ensure auth-related variables are defined to avoid notices when this partial
+// is included from pages that don't set them. Prefer controller-level auth
+// state (e.g. $_SESSION or a central auth helper) but provide safe defaults
+// here to keep the partial robust.
 $isLoggedIn = $isLoggedIn ?? ($_SESSION['is_logged_in'] ?? false);
 $userType = $userType ?? ($_SESSION['user_type'] ?? null);
 $userName = $userName ?? ($_SESSION['user_name'] ?? ($_SESSION['user']['name'] ?? 'Guest'));

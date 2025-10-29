@@ -2,19 +2,11 @@
 
 // NAVIGATION BAR 
 
-// Ensure session is started before accessing $_SESSION
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 // Prepare modal variables for login modal
 
 // Get modal-specific error from session
 $modalLoginError = $_SESSION['modal_login_error'] ?? null;
 unset($_SESSION['modal_login_error']);
-$isLoggedIn = $isLoggedIn ?? ($_SESSION['is_logged_in'] ?? false);
-$userType = $userType ?? ($_SESSION['user_type'] ?? null);
-$userName = $userName ?? ($_SESSION['user_name'] ?? ($_SESSION['user']['name'] ?? 'Guest'));
 
 // Prepare flags for login form in modal
 $showErrorAlert = !empty($modalLoginError);
@@ -58,7 +50,7 @@ $redirectUrl = '';
                         </a>
                     </li>
                     
-                    <!-- Admin Menu -->
+                    <!-- Admin Menu (if admin) -->
                     <?php if ($userType === 'admin'): ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

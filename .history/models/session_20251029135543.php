@@ -2,13 +2,13 @@
 
 // SESSION MANAGEMENT FUNCTIONS
 
-// Check user is logged in
+// Check if user is currently logged in
 
 function is_user_logged_in() {
     return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 }
 
-//  Get user data
+// Get current user data for display purposes
 
 function get_current_user_display() {
     if (!is_user_logged_in()) {
@@ -28,9 +28,8 @@ function get_current_user_display() {
         'user_email' => $_SESSION['user_email'] ?? '',
         'user_id' => $_SESSION['user_id'] ?? null
     ];
-}
 
-// Check user permission
+    // Check if current user has specific permission
 
 function user_has_permission($requiredType) {
     if (!is_user_logged_in()) {
@@ -48,7 +47,7 @@ function user_has_permission($requiredType) {
     return $userType === $requiredType;
 }
 
-// Require user to be logged in
+// User must be logged in
 
 function require_login($redirectAfterLogin = '') {
     if (!is_user_logged_in()) {
@@ -61,7 +60,7 @@ function require_login($redirectAfterLogin = '') {
 // Require specific user type/permission
 
 function require_permission($requiredType) {
-    require_login(); // First ensure logged in
+    require_login();
     
     if (!user_has_permission($requiredType)) {
         $_SESSION['error_message'] = 'You do not have permission to access this page.';

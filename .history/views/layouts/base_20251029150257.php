@@ -1,8 +1,3 @@
-<?php
-
-// BASE LAYOUT TEMPLATE
-
-?>
 <!DOCTYPE html>
 
 <html lang="en">
