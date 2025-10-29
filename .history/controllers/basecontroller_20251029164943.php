@@ -1,29 +1,29 @@
 <?php
 
 // BASE CONTROLLER
+// Sets up common variables for ALL views
+// Include this at the top of every page controller
 
 // Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include required models
+// Include dependencies
 require_once __DIR__ . '/../models/database.php';
-require_once __DIR__ . '/../models/session.php';
+require_once __DIR__ . '/../models/user_functions.php';
 
-// USER AUTHENTICATION STATE
+// SESSION & USER STATE
 
-// Get user data from session model
-$currentUser = get_current_user_display();
-$isLoggedIn = $currentUser['is_logged_in'];
-$userName = $currentUser['user_name'];
-$userType = $currentUser['user_type'];
-$userEmail = $currentUser['user_email'];
-$userId = $currentUser['user_id'];
+// Get user authentication state
+$isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+$userType = $_SESSION['user_type'] ?? null;
+$userName = $_SESSION['user_name'] ?? 'Guest';
+$userId = $_SESSION['user_id'] ?? null;
 
 // NAVIGATION FLAGS
 
-// Determine navigation display
+// Determine what to show in navigation
 $showAdminMenu = $isLoggedIn && $userType === 'admin';
 $showMemberMenu = $isLoggedIn;
 $showLoginButton = !$isLoggedIn;
@@ -31,13 +31,13 @@ $showRegisterButton = !$isLoggedIn;
 
 // LOGIN MODAL SETUP
 
-// Get modal error from session
+// Get modal-specific error from session
 $modalLoginError = $_SESSION['modal_login_error'] ?? null;
 unset($_SESSION['modal_login_error']);
 
 // Prepare flags for login form in modal
 $showModalLoginError = !empty($modalLoginError);
-$showLoginModal = $showModalLoginError;
+$showLoginModal = $showModalLoginError; // Auto-show modal if error exists
 
 // Login form configuration for modal
 $loginModal_showErrorAlert = !empty($modalLoginError);
@@ -54,14 +54,22 @@ $loginModal_redirectUrl = '';
 
 // ACTIVE NAVIGATION HELPER
 
-// Get path for navigation
+// Get current path for navigation highlighting
 $currentPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 
-// Helper function to determine if navigation item is active
-
+/**
+ * Helper function to determine if navigation item is active
+ * @param string $needle The path to check
+ * @return string 'active' or empty string
+ */
 function is_active($needle) {
     global $currentPath;
     return str_ends_with($currentPath, $needle) ? 'active' : '';
 }
+
+// COMMON VIEW VARIABLES
+
+// Page title
+$pageTitle = $pageTitle ?? 'High Street Gym';
 
 ?>

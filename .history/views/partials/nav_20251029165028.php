@@ -9,25 +9,25 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link <?= is_active('index.php') ?>" href="index.php">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= is_active('classes.php') ?>" href="controllers/classes.php">Classes</a>
+                    <a class="nav-link" href="controllers/classes.php">Classes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= is_active('blog.php') ?>" href="controllers/blog.php">Blog</a>
+                    <a class="nav-link" href="controllers/blog.php">Blog</a>
                 </li>
                 
-                <?php if ($showMemberMenu): ?>
+                <?php if ($isLoggedIn): ?>
                     <!-- Logged In User Menu -->
                     <li class="nav-item">
-                        <a class="nav-link <?= is_active('mybookings.php') ?>" href="controllers/mybookings.php">
+                        <a class="nav-link" href="controllers/mybookings.php">
                             <i class="bi bi-calendar-check"></i> My Bookings
                         </a>
                     </li>
                     
-                    <?php if ($showAdminMenu): ?>
-                        <!-- Admin Menu -->
+                    <!-- Admin Menu -->
+                    <?php if ($userType === 'admin'): ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-gear"></i> Admin
@@ -52,28 +52,52 @@
                     </li>
                 <?php else: ?>
                     <!-- Not Logged In Menu -->
-                    <?php if ($showLoginButton): ?>
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                <i class="bi bi-person-circle"></i> Login
-                            </button>
-                        </li>
-                    <?php endif; ?>
-                    
-                    <?php if ($showRegisterButton): ?>
-                        <li class="nav-item ms-2">
-                            <a href="controllers/register.php" class="btn btn-primary">
-                                <i class="bi bi-person-plus"></i> Register
-                            </a>
-                        </li>
-                    <?php endif; ?>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="bi bi-person-circle"></i> Login
+                        </button>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a href="controllers/register.php" class="btn btn-primary">
+                            <i class="bi bi-person-plus"></i> Register
+                        </a>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Login Modal -->
-<?php if ($showLoginButton): ?>
-    <?php include __DIR__ . '/modals/login_modal.php'; ?>
+<!-- Login Modal if not logged in -->
+<?php if (!$isLoggedIn): ?>
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="loginModalLabel">
+                      <i class="bi bi-person-circle"></i> Member Login
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <?php include __DIR__ . '/forms/login_form.php'; ?>
+              </div>
+              <div class="modal-footer">
+                  <small class="text-muted">
+                      Don't have an account? <a href="controllers/register.php">Register here</a>
+                  </small>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Show modal if login error -->
+  <?php if ($showErrorAlert): ?>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+          loginModal.show();
+      });
+  </script>
+  <?php endif; ?>
 <?php endif; ?>
