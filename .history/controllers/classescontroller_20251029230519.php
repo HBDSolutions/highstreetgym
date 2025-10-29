@@ -6,6 +6,24 @@
 require_once __DIR__ . '/basecontroller.php';
 require_once __DIR__ . '/../models/class_functions.php';
 
+// ========== DEBUG: REMOVE AFTER TESTING ==========
+echo '<div class="container mt-3">';
+echo '<div class="alert alert-warning">';
+echo '<h5>DEBUG INFO:</h5>';
+echo '<pre>';
+echo "Database Connection Type: " . get_class($conn) . "\n";
+echo "Connection Status: " . ($conn ? 'Connected' : 'NOT Connected') . "\n";
+
+// Test query
+$weeklySchedule = get_weekly_schedule($conn);
+echo "Schedule Count: " . count($weeklySchedule) . "\n";
+echo "Schedule Data:\n";
+print_r($weeklySchedule);
+echo '</pre>';
+echo '</div>';
+echo '</div>';
+// ========== END DEBUG ==========
+
 // Initialise flags
 $bookingMessage = '';
 $showBookingAlert = false;
@@ -52,6 +70,9 @@ foreach ($daysOfWeek as $day) {
     $dayClasses = array_filter($weeklySchedule, function($class) use ($day) {
         return $class['day_of_week'] === $day;
     });
+    
+    // DEBUG: Show what we're processing
+    echo '<pre>Processing ' . $day . ': ' . count($dayClasses) . ' classes</pre>';
     
     if (empty($dayClasses)) {
         $dayScheduleHTML[$day] = '';
@@ -159,6 +180,10 @@ foreach ($daysOfWeek as $day) {
     
     $dayScheduleHTML[$day] = $html;
 }
+
+// DEBUG: Show final HTML generation
+echo '<pre>Total days with classes: ' . count(array_filter($dayScheduleHTML)) . '</pre>';
+echo '<pre>hasSchedule flag: ' . ($hasSchedule ? 'TRUE' : 'FALSE') . '</pre>';
 
 // Set flags for view
 $showLoginPrompt = !$isLoggedIn;

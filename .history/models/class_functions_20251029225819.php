@@ -33,12 +33,26 @@ function get_weekly_schedule($conn) {
                     s.start_time";
         
         $stmt = $conn->prepare($sql);
+        
+        if (!$stmt) {
+            // DEBUG: Show PDO error
+            echo '<pre>PDO Error: ';
+            print_r($conn->errorInfo());
+            echo '</pre>';
+            return [];
+        }
+        
         $stmt->execute();
         $schedule = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // DEBUG: Show what we got
+        echo '<pre>Query executed. Rows returned: ' . count($schedule) . '</pre>';
         
         return $schedule;
         
     } catch (PDOException $e) {
+        // DEBUG: Show the actual error
+        echo '<div class="alert alert-danger">Database Error: ' . $e->getMessage() . '</div>';
         return [];
     }
 }

@@ -6,6 +6,24 @@
 require_once __DIR__ . '/basecontroller.php';
 require_once __DIR__ . '/../models/class_functions.php';
 
+// ========== DEBUG: REMOVE AFTER TESTING ==========
+echo '<div class="container mt-3">';
+echo '<div class="alert alert-warning">';
+echo '<h5>DEBUG INFO:</h5>';
+echo '<pre>';
+echo "Database Connection Type: " . get_class($conn) . "\n";
+echo "Connection Status: " . ($conn ? 'Connected' : 'NOT Connected') . "\n";
+
+// Test query
+$weeklySchedule = get_weekly_schedule($conn);
+echo "Schedule Count: " . count($weeklySchedule) . "\n";
+echo "Schedule Data:\n";
+print_r($weeklySchedule);
+echo '</pre>';
+echo '</div>';
+echo '</div>';
+// ========== END DEBUG ==========
+
 // Initialise flags
 $bookingMessage = '';
 $showBookingAlert = false;
@@ -48,7 +66,6 @@ $dayScheduleHTML = [];
 $hasSchedule = false;
 
 foreach ($daysOfWeek as $day) {
-    // Filter classes for this day
     $dayClasses = array_filter($weeklySchedule, function($class) use ($day) {
         return $class['day_of_week'] === $day;
     });
@@ -145,17 +162,17 @@ foreach ($daysOfWeek as $day) {
         } elseif ($isFull) {
             $html .= '<button class="btn btn-secondary w-100" disabled>Class Full</button>';
         } elseif (!$isLoggedIn) {
-            $html .= '<a href="/highstreetgym/controllers/login.php" class="btn btn-outline-primary w-100">Login to Book</a>';
+            $html .= '<a href="login.php" class="btn btn-outline-primary w-100">Login to Book</a>';
         }
         
-        $html .= '</div>'; // card-body
-        $html .= '</div>'; // card
-        $html .= '</div>'; // col
+        $html .= '</div>';
+        $html .= '</div>';
+        $html .= '</div>';
     }
     
-    $html .= '</div>'; // row
-    $html .= '</div>'; // card-body
-    $html .= '</div>'; // card
+    $html .= '</div>';
+    $html .= '</div>';
+    $html .= '</div>';
     
     $dayScheduleHTML[$day] = $html;
 }

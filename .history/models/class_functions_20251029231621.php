@@ -33,9 +33,14 @@ function get_weekly_schedule($conn) {
                     s.start_time";
         
         $stmt = $conn->prepare($sql);
+        
+        if (!$stmt) {
+            return [];
+        }
+        
         $stmt->execute();
         $schedule = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+                
         return $schedule;
         
     } catch (PDOException $e) {
