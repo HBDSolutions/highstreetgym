@@ -1,0 +1,236 @@
+/* === High Street Gym Custom Theme === */
+:root {
+  /* Base brand palette */
+  --hsg-primary:   #EF8354;
+  --hsg-secondary: #4F5D75;
+  --hsg-muted:     #BFC0C0;
+  --hsg-dark:      #2D3142;
+  --hsg-light:     #FFFFFF;
+
+  /* Alert / success / danger */
+  --hsg-success:   #2ECC71; /* kept in sync with --bs-success */
+  --hsg-danger:    #E74C3C; /* kept in sync with --bs-danger */
+
+  /* Bootstrap variable overrides */
+  --bs-body-bg: var(--hsg-light);
+  --bs-body-color: var(--hsg-dark);
+  --bs-primary: var(--hsg-primary);
+  --bs-secondary: var(--hsg-secondary);
+  --bs-success: var(--hsg-success);
+  --bs-danger: var(--hsg-danger);
+  --bs-warning: #F1C40F;
+  --bs-info:    #3498DB;
+  --bs-border-radius: .5rem;
+  --bs-font-sans-serif: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* === Global layout === */
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  line-height: 1.6;
+  font-family: var(--bs-font-sans-serif);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: var(--hsg-dark);
+}
+
+/* === Navbar === */
+.navbar {
+  background-color: var(--hsg-dark) !important;
+}
+.navbar .navbar-brand {
+  color: var(--hsg-primary) !important;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+.navbar .nav-link {
+  color: var(--hsg-light) !important;
+  margin-right: 1rem;
+  transition: color .2s ease-in-out;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--hsg-primary) !important;
+  text-decoration: underline;
+}
+
+/* === Main container card === */
+main.container {
+  background: var(--hsg-light);
+  padding: 2rem;
+  border-radius: var(--bs-border-radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* === Buttons === */
+.btn-primary {
+  background-color: var(--hsg-primary);
+  border-color: var(--hsg-primary);
+  color: #fff;
+  transition: background-color .12s ease-in-out, box-shadow .12s ease-in-out;
+}
+.btn-primary:hover,
+.btn-primary:active {
+  background-color: var(--hsg-secondary);
+  border-color: var(--hsg-secondary);
+}
+.btn-primary:focus,
+.btn-primary.focus {
+  outline: none;
+  box-shadow: 0 0 0 0.18rem rgba(239,131,84,0.18); /* rgba of --hsg-primary */
+}
+
+/* Outline / secondary button consistency */
+.btn-outline-secondary {
+  color: var(--hsg-secondary);
+  border-color: var(--hsg-border, #e9ecef);
+  background-color: transparent;
+}
+.btn-outline-secondary:hover {
+  background-color: rgba(79,93,117,0.06);
+  color: var(--hsg-secondary);
+}
+
+/* Ensure btn sizes use accessible contrast */
+.btn-lg, .btn {
+  border-radius: calc(var(--bs-border-radius) - .1rem);
+}
+
+/* === Alerts === */
+.alert {
+  border: 1px solid rgba(0,0,0,0.04);
+  background-color: #fff;
+  color: var(--bs-body-color);
+  padding: .8rem 1rem;
+  border-radius: .375rem;
+  box-shadow: none;
+}
+.alert .icon {
+  margin-right: .5rem;
+}
+
+/* Success / Danger specifically (slightly tinted background for readability) */
+.alert-success {
+  background-color: rgba(46,204,113,0.08); /* faint green */
+  border-color: rgba(46,204,113,0.12);
+  color: #155724;
+}
+.alert-danger {
+  background-color: rgba(231,76,60,0.08); /* faint red */
+  border-color: rgba(231,76,60,0.12);
+  color: #721c24;
+}
+
+/* Optional modal style for alerts (see server_alert partial suggestion) */
+.modal .modal-header {
+  background-color: var(--hsg-primary);
+  color: #fff;
+}
+.modal .modal-header .btn-close {
+  filter: brightness(2);
+}
+
+/* === Forms - inputs, selects, validation === */
+.form-control {
+  border: 1px solid #e9ecef;
+  background-color: #fff;
+  color: var(--bs-body-color);
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  border-radius: .375rem;
+}
+.form-control:focus {
+  border-color: var(--hsg-primary);
+  box-shadow: 0 0 0 0.12rem rgba(239,131,84,0.12);
+  outline: none;
+}
+.form-control::placeholder {
+  color: var(--hsg-muted);
+}
+
+/* Validation states */
+.form-control.is-invalid {
+  border-color: var(--hsg-danger);
+  box-shadow: 0 0 0 0.12rem rgba(231,76,60,0.10);
+}
+.form-control.is-valid {
+  border-color: var(--hsg-success);
+  box-shadow: 0 0 0 0.12rem rgba(46,204,113,0.10);
+}
+
+/* Select */
+.form-select:focus {
+  border-color: var(--hsg-primary);
+  box-shadow: 0 0 0 0.12rem rgba(239,131,84,0.12);
+}
+
+/* Inputs that use browser automation styles - keep consistent */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* === Cards & headings === */
+.card {
+  background-color: var(--hsg-light);
+  border: 1px solid #f0f0f0;
+  border-radius: .5rem;
+}
+.card .card-title {
+  color: var(--hsg-secondary);
+  font-weight: 600;
+}
+.card .card-text {
+  color: var(--bs-body-color);
+}
+
+/* If some card text used .text-success/.text-danger, ensure contrast */
+.text-success {
+  color: var(--hsg-success) !important;
+}
+.text-danger {
+  color: var(--hsg-danger) !important;
+}
+
+/* === Links and hover states === */
+a {
+  color: var(--hsg-primary);
+}
+a:hover, a:focus {
+  color: var(--hsg-secondary);
+  text-decoration: underline;
+}
+
+/* === Badges/tables / misc === */
+.badge-primary {
+  background-color: var(--hsg-primary);
+}
+.table thead th {
+  border-bottom: 2px solid rgba(0,0,0,0.06);
+}
+
+/* List group tidy */
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid var(--hsg-muted);
+}
+
+/* Small responsive tweak */
+@media (max-width: 576px) {
+  .card .card-body { padding: .75rem; }
+}
+
+/* Ensure focus outlines are visible for keyboard users */
+:focus {
+  outline: 3px solid rgba(239,131,84,0.12);
+  outline-offset: 2px;
+}
+
+/* === Utility classes used by server-side code === */
+/* If you use .success-msg / .error-msg inline, normalise them to alerts */
+.success-msg { display:block; margin-bottom: 1rem; color: #155724; }
+.error-msg { display:block; margin-bottom: 1rem; color: #721c24; }
+
+/* === End of theme file === */
