@@ -10,7 +10,7 @@
                 <a href="/highstreetgym/controllers/auth/register_controller.php" class="btn btn-primary btn-lg me-2">
                     Join Now
                 </a>
-                <a href="/highstreetgym/controllers/auth/login_controller.php" class="btn btn-secondary btn-lg">
+                <a href="/highstreetgym/controllers/auth/login_controller.php" class="btn btn-outline-secondary btn-lg">
                     Login
                 </a>
             </div>
@@ -21,7 +21,7 @@
                 <a href="/highstreetgym/controllers/content/classes_controller.php" class="btn btn-primary btn-lg me-2">
                     Browse Classes
                 </a>
-                <a href="/highstreetgym/controllers/content/bookings_controller.php" class="btn btn-primary btn-lg">
+                <a href="/highstreetgym/controllers/content/bookings_controller.php" class="btn btn-outline-primary btn-lg">
                     My Bookings
                 </a>
             </div>

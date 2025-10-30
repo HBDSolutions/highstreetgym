@@ -179,7 +179,7 @@ input[type="search"]::-webkit-search-decoration {
   border-radius: .5rem;
 }
 .card .card-title {
-  color: var(--hsg-secondary);
+  color: var(--hsg-dark);
   font-weight: 600;
 }
 .card .card-text {

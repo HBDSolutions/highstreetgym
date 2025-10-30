@@ -32,9 +32,14 @@ body {
   font-family: var(--bs-font-sans-serif);
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
   font-weight: 600;
   color: var(--hsg-dark);
+}
+
+h4 {
+  font-weight: 600;
+  color: var(--hsg-primary);
 }
 
 /* === Navbar === */
@@ -179,7 +184,7 @@ input[type="search"]::-webkit-search-decoration {
   border-radius: .5rem;
 }
 .card .card-title {
-  color: var(--hsg-secondary);
+  color: var(--hsg-dark);
   font-weight: 600;
 }
 .card .card-text {

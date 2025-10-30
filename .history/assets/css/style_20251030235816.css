@@ -37,6 +37,10 @@ h1, h2, h3, h4 {
   color: var(--hsg-dark);
 }
 
+h4 {
+  color: var(--hsg-primary);
+}
+
 /* === Navbar === */
 .navbar {
   background-color: var(--hsg-dark) !important;
@@ -179,7 +183,7 @@ input[type="search"]::-webkit-search-decoration {
   border-radius: .5rem;
 }
 .card .card-title {
-  color: var(--hsg-secondary);
+  color: var(--hsg-dark);
   font-weight: 600;
 }
 .card .card-text {
