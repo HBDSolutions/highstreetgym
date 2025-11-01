@@ -30,6 +30,6 @@
                 maxlength="2000"></textarea>
         </div>
         
-        <button type="submit" class="btn btn-primary">Post Message</button>
+        <button type="submit" class="btn btn-success">Post Message</button>
     </form>
 </section>

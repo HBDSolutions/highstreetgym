@@ -18,7 +18,7 @@
                             <form method="POST" class="mt-3">
                                 <input type="hidden" name="action" value="book">
                                 <input type="hidden" name="schedule_id" value="<?= $class['schedule_id'] ?>">
-                                <button type="submit" class="btn btn-primary w-100">Book Class</button>
+                                <button type="submit" class="btn btn-secondary w-100">Book Class</button>
                             </form>
                         <?php endif; ?>
                     </div>
