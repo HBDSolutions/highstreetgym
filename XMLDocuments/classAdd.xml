@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE classes SYSTEM "class.dtd">
+<classes>
+  <class>
+    <class_name>Yoga</class_name>
+    <description>Zen flow session</description>
+    <duration>45</duration>
+    <difficulty_level>Beginner</difficulty_level>
+  </class>
+  <class>
+    <class_name>HIIT</class_name>
+    <duration>30</duration>
+    <difficulty_level>Advanced</difficulty_level>
+  </class>
+</classes>

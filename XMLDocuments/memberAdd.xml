@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE members SYSTEM "member.dtd">
+<members>
+  <member>
+    <first_name>Pat</first_name>
+    <last_name>Postman</last_name>
+    <email>pat@example.com</email>
+    <phone>0400 000 001</phone>
+    <status>active</status>
+  </member>
+  <member>
+    <first_name>Thomas</first_name>
+    <last_name>Tankengine</last_name>
+    <email>tom@example.com</email>
+    <status>inactive</status>
+  </member>
+</members>

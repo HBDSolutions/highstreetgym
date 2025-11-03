@@ -1,0 +1,8 @@
+<!ELEMENT classes (class+)>
+<!ELEMENT class (class_name, description?, duration, difficulty_level)>
+<!ELEMENT class_name       (#PCDATA)>
+<!ELEMENT description      (#PCDATA)>
+<!ELEMENT duration         (#PCDATA)>
+<!ELEMENT difficulty_level (#PCDATA)>
+<!ATTLIST difficulty_level
+          level (beginner | intermediate | advanced) "beginner">
