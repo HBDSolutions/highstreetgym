@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE members SYSTEM "../public/xml/dtd/memberAdd.dtd">
+<!DOCTYPE members SYSTEM "member.dtd">
 <members>
   <member>
     <first_name>Pat</first_name>

@@ -35,24 +35,6 @@ function get_weekly_schedule($conn) {
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $schedule = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // NORMALISE SHORT DAY CODES TO FULL NAMES FOR UI
-        $map = [
-            'Mon' => 'Monday',
-            'Tue' => 'Tuesday',
-            'Wed' => 'Wednesday',
-            'Thu' => 'Thursday',
-            'Fri' => 'Friday',
-            'Sat' => 'Saturday',
-            'Sun' => 'Sunday'
-        ];
-
-foreach ($schedule as &$row) {
-    if (isset($row['day_of_week'], $map[$row['day_of_week']])) {
-        $row['day_of_week'] = $map[$row['day_of_week']];
-    }
-}
-unset($row);
         
         return $schedule;
         
@@ -64,21 +46,6 @@ unset($row);
 // Get schedule by day of week
 
 function get_schedule_by_day($conn, $dayOfWeek) {
-    
-    // ACCEPT FULL OR SHORT DAY AND CONVERT TO DB VALUE
-    $toShort = [
-        'Monday'    => 'Mon',
-        'Tuesday'   => 'Tue',
-        'Wednesday' => 'Wed',
-        'Thursday'  => 'Thu',
-        'Friday'    => 'Fri',
-        'Saturday'  => 'Sat',
-        'Sunday'    => 'Sun'
-    ];
-    if (isset($toShort[$dayOfWeek])) {
-        $dayOfWeek = $toShort[$dayOfWeek];
-    }
-
     try {
         $sql = "SELECT 
                     s.schedule_id,

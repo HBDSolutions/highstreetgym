@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE classes SYSTEM "../public/xml/dtd/classAdd.dtd">
+<!DOCTYPE classes SYSTEM "class.dtd">
 <classes>
   <class>
     <class_name>Yoga</class_name>

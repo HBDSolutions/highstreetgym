@@ -7,14 +7,7 @@
     <class_id>3</class_id>
     <day_of_week day="Mon">Mon</day_of_week>
     <start_time>07:00</start_time>
-    <end_time>07:45</end_time>
+    <end_time>07:55</end_time>
     <max_capacity>15</max_capacity>
-  </schedule>
-  <schedule>
-    <trainer_id>1</trainer_id>
-    <class_id>3</class_id>
-    <day_of_week day="Wed">Wed</day_of_week>
-    <start_time>06:00</start_time>
-    <end_time>07:00</end_time>
   </schedule>
 </schedules>

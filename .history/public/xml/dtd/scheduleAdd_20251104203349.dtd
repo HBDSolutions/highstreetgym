@@ -1,0 +1,9 @@
+<!ELEMENT schedules (schedule+)>
+<!ELEMENT schedule (trainer_id, class_id, day_of_week, start_time, end_time, max_capacity?)>
+<!ELEMENT trainer_id   (#PCDATA)>
+<!ELEMENT class_id     (#PCDATA)>
+<!ELEMENT day_of_week  (#PCDATA)>
+<!ELEMENT start_time   (#PCDATA)>
+<!ELEMENT end_time     (#PCDATA)>
+<!ELEMENT max_capacity (#PCDATA)>
+<!ATTLIST day_of_week day (Mon|Tue|Wed|Thu|Fri|Sat|Sun) #REQUIRED>
