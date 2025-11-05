@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 // SHOW FORM
 function show_register_form(): void {
-    // START SESSION IF NEEDED
+    // START SESSION FOR LAYOUT
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -14,20 +14,19 @@ function show_register_form(): void {
     require_once __DIR__ . '/../../models/database.php';
     require_once __DIR__ . '/../../models/session.php';
 
-    // GET AUTHENTICATION STATE FOR LAYOUT
+    // GET AUTHENTICATION STATE
     $currentUser = get_current_user_display();
     $isLoggedIn = $currentUser['is_logged_in'];
     $userId = $currentUser['user_id'];
     $userName = $currentUser['user_name'];
     $userType = $currentUser['user_type'];
 
-    // DEFINE VIEW VARIABLES FOR PUBLIC LAYOUT
+    // DEFINE VIEW VARIABLES
     $pageTitle = 'Register';
-    $title = $pageTitle . ' - High Street Gym';
     $contentView = __DIR__ . '/../../views/auth/register.php';
 
-    // USE PUBLIC LAYOUT DIRECTLY (FOR UNAUTHENTICATED USERS)
-    require __DIR__ . '/../../views/layouts/public.php';
+    // LOAD LAYOUT
+    require_once __DIR__ . '/../layouts/public_layout.php';
 }
 
 // HANDLE POST

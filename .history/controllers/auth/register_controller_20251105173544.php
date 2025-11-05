@@ -3,31 +3,15 @@ declare(strict_types=1);
 
 // REGISTER CONTROLLER
 
+$VIEWS = __DIR__ . '/../../views';
+
 // SHOW FORM
 function show_register_form(): void {
-    // START SESSION IF NEEDED
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    
-    // INCLUDE DEPENDENCIES
-    require_once __DIR__ . '/../../models/database.php';
-    require_once __DIR__ . '/../../models/session.php';
-
-    // GET AUTHENTICATION STATE FOR LAYOUT
-    $currentUser = get_current_user_display();
-    $isLoggedIn = $currentUser['is_logged_in'];
-    $userId = $currentUser['user_id'];
-    $userName = $currentUser['user_name'];
-    $userType = $currentUser['user_type'];
-
-    // DEFINE VIEW VARIABLES FOR PUBLIC LAYOUT
-    $pageTitle = 'Register';
-    $title = $pageTitle . ' - High Street Gym';
-    $contentView = __DIR__ . '/../../views/auth/register.php';
-
-    // USE PUBLIC LAYOUT DIRECTLY (FOR UNAUTHENTICATED USERS)
-    require __DIR__ . '/../../views/layouts/public.php';
+    global $VIEWS;
+    require $VIEWS . '/partials/header.php';
+    require $VIEWS . '/partials/nav.php';
+    require $VIEWS . '/auth/register.php';
+    require $VIEWS . '/partials/footer.php';
 }
 
 // HANDLE POST
@@ -59,7 +43,7 @@ function handle_register(): void {
     require_once __DIR__ . '/../../models/database.php';
     require_once __DIR__ . '/../../models/user_functions.php';
 
-    // CREATE USER USING THE AVAILABLE REGISTER_USER FUNCTION
+    // CREATE USER using the available register_user function
     $conn = get_database_connection();
     $registrationData = [
         'first_name' => $first,
@@ -77,7 +61,7 @@ function handle_register(): void {
         exit;
     }
 
-    // AUTO-LOGIN AFTER REGISTER - SET SESSION DATA CONSISTENTLY
+    // AUTO-LOGIN AFTER REGISTER - Set session data consistently
     $_SESSION['logged_in'] = true;
     $_SESSION['user_id'] = (int)$result['user_id'];
     $_SESSION['user_type'] = 'member';

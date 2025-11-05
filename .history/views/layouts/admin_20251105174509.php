@@ -22,11 +22,6 @@ $navData = get_navigation_data();
     <!-- Admin Navigation -->
     <?php include __DIR__ . '/../partials/nav.php'; ?>
     
-    <!-- Main Content -->
-    <main>
-        <?php include $contentView; ?>
-    </main>
-    
     <!-- Footer -->
     <?php include __DIR__ . '/../partials/footer.php'; ?>
     

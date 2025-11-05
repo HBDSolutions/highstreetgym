@@ -1,3 +1,9 @@
+<?php
+// PREPARE NAVIGATION DATA FOR DUMB VIEW
+require_once __DIR__ . '/../../models/session.php';
+require_once __DIR__ . '/../../models/navigation.php';
+$navData = get_navigation_data();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

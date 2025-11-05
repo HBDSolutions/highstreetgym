@@ -1,7 +1,6 @@
 <?php
-// DUMB LOGIN FORM COMPONENT - EXTRACTED FROM EXISTING LOGIN.PHP
-// EXPECTS $loginFormContext TO BE PROVIDED
-// THIS IS JUST THE FORM PART, NOT A FULL PAGE
+// DUMB LOGIN FORM VIEW - EXPECTS $loginFormContext TO BE PROVIDED
+// NO BUSINESS LOGIC OR DATA MANIPULATION HERE
 ?>
 
 <?php if ($loginFormContext['showErrorAlert']): ?>
@@ -25,10 +24,10 @@
 <form method="post" action="<?= htmlspecialchars($loginFormContext['formAction']) ?>">
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input id="email" 
-               name="email" 
-               type="email" 
+        <input type="email" 
                class="form-control" 
+               id="email" 
+               name="email" 
                required 
                autocomplete="username"
                value="<?= htmlspecialchars($loginFormContext['previousEmail']) ?>">
@@ -36,10 +35,10 @@
     
     <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input id="password" 
-               name="password" 
-               type="password" 
+        <input type="password" 
                class="form-control" 
+               id="password" 
+               name="password" 
                required 
                autocomplete="current-password">
     </div>
@@ -49,6 +48,14 @@
     <?php endif; ?>
     
     <div class="d-grid">
-        <button type="submit" class="btn btn-primary">Sign In</button>
+        <button type="submit" class="btn btn-primary">Login</button>
     </div>
 </form>
+
+<?php if ($loginFormContext['showRegisterLink']): ?>
+    <div class="text-center mt-3">
+        <small class="text-muted">
+            Don't have an account? <a href="/highstreetgym/controllers/auth/register_controller.php">Register here</a>
+        </small>
+    </div>
+<?php endif; ?>

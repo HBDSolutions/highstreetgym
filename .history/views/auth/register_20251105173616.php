@@ -1,6 +1,6 @@
 <?php
 // REGISTER VIEW
-// SESSION IS ALREADY STARTED BY THE CONTROLLER, SO WE DON'T NEED TO START IT HERE
+// Session is already started by the controller, so we don't need to start it here
 $err = $_SESSION['flash_error'] ?? '';
 unset($_SESSION['flash_error']);
 ?>

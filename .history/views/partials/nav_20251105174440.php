@@ -67,10 +67,5 @@
 
 <!-- Login Modal -->
 <?php if ($navData['showLoginButton']): ?>
-    <?php 
-    // PROVIDE MODAL VARIABLES FOR DUMB VIEW
-    $showLoginModal = $navData['showLoginModal'];
-    $loginModalContext = $navData['loginModalContext'];
-    include __DIR__ . '/modals/login_modal.php'; 
-    ?>
+    <?php include __DIR__ . '/modals/login_modal.php'; ?>
 <?php endif; ?>

@@ -58,7 +58,7 @@ function user_has_permission($requiredType) {
     return $userType === $requiredType;
 }
 
-// REQUIRE LOGIN
+// Require user to be logged in
 
 function require_login($redirectAfterLogin = '') {
     if (!is_user_logged_in()) {
@@ -68,10 +68,10 @@ function require_login($redirectAfterLogin = '') {
     }
 }
 
-// REQUIRE SPECIFIC USER TYPE
+// Require specific user type
 
 function require_permission($requiredType) {
-    require_login();
+    require_login(); // First ensure logged in
     
     if (!user_has_permission($requiredType)) {
         $_SESSION['error_message'] = 'You do not have permission to access this page.';

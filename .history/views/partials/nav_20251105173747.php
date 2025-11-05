@@ -1,6 +1,25 @@
 <?php
-// DUMB NAVIGATION VIEW - EXPECTS $navData TO BE PROVIDED BY CONTROLLER
-// NO BUSINESS LOGIC OR DATA MANIPULATION HERE
+    // NAV CONTEXT - GET AUTHENTICATION STATE CONSISTENTLY
+    if (session_status() === PHP_SESSION_NONE) { 
+        session_start(); 
+    }
+    
+    // USE THE SESSION MODEL TO GET CONSISTENT AUTH STATE
+    require_once __DIR__ . '/../../models/session.php';
+    $currentUser = get_current_user_display();
+    
+    $isLoggedIn = $currentUser['is_logged_in'];
+    $userName = $currentUser['user_name'];
+    $userType = $currentUser['user_type'];
+    $isAdmin = ($userType === 'admin');
+    
+    $homeHref = $isAdmin
+        ? '/highstreetgym/controllers/content/admin_controller.php'
+        : '/highstreetgym/controllers/content/home_controller.php';
+        
+    $showMemberMenu = $isLoggedIn;
+    $showAdminMenu = $isAdmin;
+    $showLoginButton = !$isLoggedIn;
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -15,22 +34,22 @@
             <!-- Navigation Links -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= htmlspecialchars($navData['homeHref']) ?>">Home</a>
+                    <a class="nav-link" href="<?= $homeHref ?>">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= is_navigation_active('classes_controller.php', $navData['currentPath']) ?>" href="/highstreetgym/controllers/content/classes_controller.php">Classes</a>
+                    <a class="nav-link <?= is_active('classes_controller.php') ?>" href="/highstreetgym/controllers/content/classes_controller.php">Classes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= is_navigation_active('blog_controller.php', $navData['currentPath']) ?>" href="/highstreetgym/controllers/content/blog_controller.php">Blog</a>
+                    <a class="nav-link <?= is_active('blog_controller.php') ?>" href="/highstreetgym/controllers/content/blog_controller.php">Blog</a>
                 </li>
                 
-                <?php if ($navData['showMemberMenu']): ?>
+                <?php if ($showMemberMenu): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= is_navigation_active('bookings_controller.php', $navData['currentPath']) ?>" href="/highstreetgym/controllers/content/bookings_controller.php">My Bookings</a>
+                        <a class="nav-link <?= is_active('bookings_controller.php') ?>" href="/highstreetgym/controllers/content/bookings_controller.php">My Bookings</a>
                     </li>
                 <?php endif; ?>
               
-                <?php if ($navData['showAdminMenu']): ?>
+                <?php if ($showAdminMenu): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Admin</a>
                         <ul class="dropdown-menu">
@@ -42,9 +61,9 @@
                     </li>
                 <?php endif; ?>
               
-                <?php if ($navData['isLoggedIn']): ?>
+                <?php if ($isLoggedIn): ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><?= htmlspecialchars($navData['userName']) ?>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><?= htmlspecialchars($userName) ?>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/highstreetgym/controllers/content/bookings_controller.php">My Bookings</a></li>
@@ -66,11 +85,6 @@
 </nav>
 
 <!-- Login Modal -->
-<?php if ($navData['showLoginButton']): ?>
-    <?php 
-    // PROVIDE MODAL VARIABLES FOR DUMB VIEW
-    $showLoginModal = $navData['showLoginModal'];
-    $loginModalContext = $navData['loginModalContext'];
-    include __DIR__ . '/modals/login_modal.php'; 
-    ?>
+<?php if ($showLoginButton): ?>
+    <?php include __DIR__ . '/modals/login_modal.php'; ?>
 <?php endif; ?>

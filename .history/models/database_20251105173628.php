@@ -17,7 +17,7 @@ catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
 
-// FUNCTION TO GET DATABASE CONNECTION
+// Function to get database connection
 function get_database_connection() {
     static $connection = null;
     

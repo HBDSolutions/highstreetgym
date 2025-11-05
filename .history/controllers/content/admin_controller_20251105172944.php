@@ -26,10 +26,9 @@ $userId = $currentUser['user_id'];
 $userName = $currentUser['user_name'];
 $userType = $currentUser['user_type'];
 
-// Define view variables for admin layout
+// Define view variables
 $pageTitle = 'Admin Dashboard';
-$title = $pageTitle . ' - High Street Gym';
-$contentView = __DIR__ . '/../../views/admin/dashboard.php';
+$contentView = __DIR__ . '/../../views/content/admin_dashboard.php';
 
-// USE ADMIN LAYOUT DIRECTLY (FOR ADMIN USERS)
-require __DIR__ . '/../../views/layouts/admin.php';
+// Load layout
+require_once __DIR__ . '/../layouts/public_layout.php';

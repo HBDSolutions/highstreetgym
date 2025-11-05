@@ -3,31 +3,15 @@ declare(strict_types=1);
 
 // REGISTER CONTROLLER
 
+$VIEWS = __DIR__ . '/../../views';
+
 // SHOW FORM
 function show_register_form(): void {
-    // START SESSION IF NEEDED
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    
-    // INCLUDE DEPENDENCIES
-    require_once __DIR__ . '/../../models/database.php';
-    require_once __DIR__ . '/../../models/session.php';
-
-    // GET AUTHENTICATION STATE FOR LAYOUT
-    $currentUser = get_current_user_display();
-    $isLoggedIn = $currentUser['is_logged_in'];
-    $userId = $currentUser['user_id'];
-    $userName = $currentUser['user_name'];
-    $userType = $currentUser['user_type'];
-
-    // DEFINE VIEW VARIABLES FOR PUBLIC LAYOUT
-    $pageTitle = 'Register';
-    $title = $pageTitle . ' - High Street Gym';
-    $contentView = __DIR__ . '/../../views/auth/register.php';
-
-    // USE PUBLIC LAYOUT DIRECTLY (FOR UNAUTHENTICATED USERS)
-    require __DIR__ . '/../../views/layouts/public.php';
+    global $VIEWS;
+    require $VIEWS . '/partials/header.php';
+    require $VIEWS . '/partials/nav.php';
+    require $VIEWS . '/auth/register.php';
+    require $VIEWS . '/partials/footer.php';
 }
 
 // HANDLE POST
@@ -59,31 +43,18 @@ function handle_register(): void {
     require_once __DIR__ . '/../../models/database.php';
     require_once __DIR__ . '/../../models/user_functions.php';
 
-    // CREATE USER USING THE AVAILABLE REGISTER_USER FUNCTION
-    $conn = get_database_connection();
-    $registrationData = [
-        'first_name' => $first,
-        'last_name' => $last,
-        'email' => $email,
-        'password' => $pass,
-        'password_confirm' => $confirm
-    ];
-    
-    $result = register_user($conn, $registrationData);
-    
-    if (!$result['success']) {
-        $_SESSION['flash_error'] = strtoupper($result['message']);
+    // CREATE USER
+    try {
+        $userId = create_user_member($email, $pass, $first, $last);
+    } catch (Throwable $e) {
+        $_SESSION['flash_error'] = 'REGISTRATION FAILED.';
         header('Location: /highstreetgym/controllers/auth/register_controller.php');
         exit;
     }
 
-    // AUTO-LOGIN AFTER REGISTER - SET SESSION DATA CONSISTENTLY
-    $_SESSION['logged_in'] = true;
-    $_SESSION['user_id'] = (int)$result['user_id'];
+    // AUTO-LOGIN AFTER REGISTER
+    $_SESSION['user_id'] = (int)$userId;
     $_SESSION['user_type'] = 'member';
-    $_SESSION['user_email'] = $email;
-    $_SESSION['first_name'] = $first;
-    $_SESSION['last_name'] = $last;
 
     // REDIRECT TO HOME
     header('Location: /highstreetgym/controllers/content/home_controller.php');
