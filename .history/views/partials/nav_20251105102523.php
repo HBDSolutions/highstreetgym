@@ -34,16 +34,13 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
               
               <?php if ($showAdminMenu): ?>
                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        Admin
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/highstreetgym/controllers/content/admin_controller.php">Dashboard</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/highstreetgym/controllers/content/xml_import_controller.php?prefill=members">Import Members (XML)</a></li>
-                        <li><a class="dropdown-item" href="/highstreetgym/controllers/content/xml_import_controller.php?prefill=classes">Import Classes (XML)</a></li>
-                        <li><a class="dropdown-item" href="/highstreetgym/controllers/content/xml_import_controller.php?prefill=schedules">Import Schedules (XML)</a></li>
-                    </ul>
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                          Admin
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Manage Users</a></li>
+                          <li><a class="dropdown-item" href="#">Manage Classes</a></li>
+                      </ul>
                   </li>
               <?php endif; ?>
               

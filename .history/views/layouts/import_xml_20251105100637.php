@@ -25,18 +25,15 @@
 
         <fieldset style="margin: 1rem 0;">
             <legend>Import Type</legend>
-            <label>
-                <input type="radio" name="import_type" value="members"
-                        <?= $prefill === 'members' ? 'checked' : '' ?>> Members
-            </label><br>
-            <label>
-            <input type="radio" name="import_type" value="classes"
-                    <?= $prefill === 'classes' ? 'checked' : '' ?>> Classes
-            </label><br>
-            <label>
-            <input type="radio" name="import_type" value="schedules"
-                    <?= $prefill === 'schedules' ? 'checked' : '' ?>> Schedules
-            </label>
+                <label>
+                    <input type="radio" name="import_type" value="members"
+                            <?= $prefill === 'members' ? 'checked' : '' ?>> Members
+                </label><br>
+                <label>
+                <input type="radio" name="import_type" value="classes"
+                        <?= $prefill === 'classes' ? 'checked' : '' ?>> Classes
+                </label><br>
+            <label><input type="radio" name="import_type" value="schedules" required> Schedules</label>
         </fieldset>
 
         <fieldset style="margin: 1rem 0;">

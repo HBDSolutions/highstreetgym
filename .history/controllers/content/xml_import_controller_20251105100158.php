@@ -12,13 +12,7 @@ class XmlImportController
         if (empty($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         }
-
-        // ACCEPT PREFILL TYPE FROM ADMIN DASHBOARD
-        $prefill = $_GET['prefill'] ?? '';
-        if (!in_array($prefill, ['members','classes','schedules'], true)) {
-            $prefill = '';
-        }
-
+        
         require __DIR__ . '/../../views/layouts/import_xml.php';
     }
 
