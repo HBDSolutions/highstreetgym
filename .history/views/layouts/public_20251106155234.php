@@ -15,14 +15,7 @@
 
   <?php include __DIR__ . '/../partials/nav.php'; ?>
 
-  <div class="container" style="padding:1rem 0 2rem;">
-    <div style="padding:.5rem .75rem;margin:.5rem 0;background:#ffe8a1;border:1px solid #e0b100;border-radius:.25rem;">
-      PUBLIC LAYOUT OK • contentView:
-      <code><?= isset($contentView) ? htmlspecialchars($contentView) : 'NOT SET' ?></code>
-      • exists:
-      <strong><?= (isset($contentView) && is_file($contentView)) ? 'YES' : 'NO' ?></strong>
-    </div>
-
+  <main class="container" style="padding:1rem 0 2rem;">
     <?php
       if (isset($contentView) && is_file($contentView)) {
           include $contentView;
@@ -30,9 +23,12 @@
           echo '<h1>Content not found</h1>';
       }
     ?>
-  </div>
+  </main>
 
-  <?php $footer = __DIR__ . '/../partials/footer.php'; if (is_file($footer)) { include $footer; } ?>
+  <?php
+    $footer = __DIR__ . '/../partials/footer.php';
+    if (is_file($footer)) { include $footer; }
+  ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

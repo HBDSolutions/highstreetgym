@@ -19,7 +19,12 @@ $contentView = __DIR__ . '/../../views/content/home.php';
 if ($userType === 'admin') {
     require __DIR__ . '/../layouts/admin_layout.php';
 } elseif ($isLoggedIn) {
-    require __DIR__ . '/../layouts/member_layout.php';
+    $memberLayout = __DIR__ . '/../layouts/member_layout.php';
+    if (is_file($memberLayout)) {
+        require $memberLayout;
+    } else {
+        require __DIR__ . '/../layouts/public_layout.php';
+    }
 } else {
     require __DIR__ . '/../layouts/public_layout.php';
 }

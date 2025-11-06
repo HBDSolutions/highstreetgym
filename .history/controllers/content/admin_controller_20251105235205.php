@@ -1,6 +1,6 @@
-<<?php
+<?php
 // ADMIN CONTROLLER
-// PURPOSE: LOADS ADMIN HOME VIA ADMIN LAYOUT
+// PURPOSE: SETS PAGE TITLE AND VIEW, THEN RENDERS ADMIN LAYOUT
 
 declare(strict_types=1);
 
@@ -12,7 +12,6 @@ if (session_status() === PHP_SESSION_NONE) {
 // Include dependencies
 require_once __DIR__ . '/../../models/database.php';
 require_once __DIR__ . '/../../models/session.php';
-require_once __DIR__ . '/../layouts/admin_layout.php';
 
 // Require admin permission
 require_permission('admin');
@@ -25,9 +24,9 @@ $userName = $currentUser['user_name'];
 $userType = $currentUser['user_type'];
 
 // Define view variables for admin layout
-$pageTitle = 'Admin Home';
+$pageTitle = 'Admin Dashboard';
 $title = $pageTitle . ' - High Street Gym';
 $contentView = __DIR__ . '/../../views/admin/dashboard.php';
 
 // USE ADMIN LAYOUT DIRECTLY (FOR ADMIN USERS)
-require __DIR__ . '/../layouts/admin_layout.php';
+require __DIR__ . '/../../views/layouts/admin.php';

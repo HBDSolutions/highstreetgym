@@ -100,24 +100,6 @@ main.container {
   outline: none;
 }
 
-/* ACCESSIBLE SKIP LINK */
-.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
-.skip-link:focus { position: static; width: auto; height: auto; margin: 0.5rem; }
-
-/* SIMPLE LAYOUT FOR THE TILE SECTION (uses your tokens only) */
-section[aria-label="Admin Imports"] {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: stretch;
-  margin: 1rem 0 2rem;
-}
-
-/* SMALL-SCREEN TWEAK (optional) */
-@media (max-width: 576px) {
-  .tile { width: 100%; height: 180px; line-height: normal; }
-  .tile a { line-height: 180px; }
-}
 
 /* === Tables === */
 .table {

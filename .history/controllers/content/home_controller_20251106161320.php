@@ -3,9 +3,7 @@
 // PURPOSE: LOADS HOME PAGE AND SELECTS LAYOUT BASED ON USER ROLE
 
 // START SESSION
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
 // READ AUTH STATE
 $isLoggedIn = !empty($_SESSION['user_id'] ?? null);
@@ -19,7 +17,8 @@ $contentView = __DIR__ . '/../../views/content/home.php';
 if ($userType === 'admin') {
     require __DIR__ . '/../layouts/admin_layout.php';
 } elseif ($isLoggedIn) {
-    require __DIR__ . '/../layouts/member_layout.php';
+    $memberLayout = __DIR__ . '/../layouts/member_layout.php';
+    require is_file($memberLayout) ? $memberLayout : __DIR__ . '/../layouts/public_layout.php';
 } else {
     require __DIR__ . '/../layouts/public_layout.php';
 }

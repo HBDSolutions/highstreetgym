@@ -3,7 +3,7 @@
 // PURPOSE: PROVIDES ADMIN LANDING PAGE WITH IMPORT LINKS
 ?>
 
-<!-- SKIP LINK FOR ACCESSIBILITY -->
+<!-- SKIP LINK -->
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- PAGE TITLE -->
@@ -12,7 +12,7 @@
 </header>
 
 <!-- IMPORT LINKS -->
-<section aria-label="Admin Imports">
+<section id="main" aria-label="Admin Imports">
   <div class="tile">
     <a href="/highstreetgym/controllers/content/xml_import_controller.php?type=members">Import Members</a>
   </div>

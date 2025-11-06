@@ -4,7 +4,7 @@
 
 // INCLUDE DEPENDENCIES
 require_once __DIR__ . '/base_layout.php';
-require_once __DIR__ . '/../../models/user_functions.php';
+require_once __DIR__ . '/../../models/user_functions.php'; // ENSURE HELPERS ARE LOADED
 
 // INITIALISE BASE LAYOUT DATA
 $layoutData = init_base_layout();
