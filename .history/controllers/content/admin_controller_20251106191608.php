@@ -1,6 +1,9 @@
 <?php
-// ADMIN CONTROLLER
-// PURPOSE: LOADS ADMIN HOME VIA ADMIN LAYOUT
+/**
+ * ADMIN DASHBOARD CONTROLLER
+ * 
+ * RESPONSIBILITY: Admin dashboard content and access control
+ */
 
 declare(strict_types=1);
 
@@ -23,10 +26,9 @@ $userId = $currentUser['user_id'];
 $userName = $currentUser['user_name'];
 $userType = $currentUser['user_type'];
 
-// Define view variables for admin layout
-$pageTitle = 'Admin Home';
-$title = $pageTitle . ' - High Street Gym';
-$contentView = __DIR__ . '/../../views/admin/dashboard.php';
+// Define view variables
+$pageTitle = 'Admin Dashboard';
+$contentView = __DIR__ . '/../../views/content/admin_dashboard.php';
 
-// USE ADMIN LAYOUT DIRECTLY (FOR ADMIN USERS)
-require __DIR__ . '/../layouts/admin_layout.php';
+// Load layout
+require_once __DIR__ . '/../layouts/public_layout.php';

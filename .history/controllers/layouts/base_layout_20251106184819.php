@@ -60,6 +60,13 @@ function init_base_layout() {
     ];
 }
 
+// Navigation helper function
+
+function is_active($needle) {
+    global $currentPath;
+    return str_ends_with($currentPath, $needle) ? 'active' : '';
+}
+
 // Validate required view variables
 
 function validate_layout_requirements($pageTitle, $contentView) {

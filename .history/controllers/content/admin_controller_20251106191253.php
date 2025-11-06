@@ -1,4 +1,4 @@
-<?php
+<<?php
 // ADMIN CONTROLLER
 // PURPOSE: LOADS ADMIN HOME VIA ADMIN LAYOUT
 
@@ -12,6 +12,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Include dependencies
 require_once __DIR__ . '/../../models/database.php';
 require_once __DIR__ . '/../../models/session.php';
+require_once __DIR__ . '/../layouts/admin_layout.php';
 
 // Require admin permission
 require_permission('admin');

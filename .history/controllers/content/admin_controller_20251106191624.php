@@ -1,6 +1,6 @@
 <?php
 // ADMIN CONTROLLER
-// PURPOSE: LOADS ADMIN HOME VIA ADMIN LAYOUT
+// PURPOSE: SETS PAGE TITLE AND VIEW, THEN RENDERS ADMIN LAYOUT
 
 declare(strict_types=1);
 
@@ -29,4 +29,4 @@ $title = $pageTitle . ' - High Street Gym';
 $contentView = __DIR__ . '/../../views/admin/dashboard.php';
 
 // USE ADMIN LAYOUT DIRECTLY (FOR ADMIN USERS)
-require __DIR__ . '/../layouts/admin_layout.php';
+require __DIR__ . '/../../views/layouts/admin.php';
