@@ -5,13 +5,13 @@
 // GET NAVIGATION DATA FOR VIEWS
 function get_navigation_data(): array {
     // USER STATE
-    $currentUser  = get_current_user_display();
+    $currentUser  = get_current_user_display(); // from session.php
     $isLoggedIn   = $currentUser['is_logged_in'] ?? false;
     $userName     = $currentUser['user_name']    ?? '';
     $userType     = $currentUser['user_type']    ?? 'guest';
     $isAdmin      = ($userType === 'admin');
 
-    // USER FLAGS TO SHOW/HIDE NAV ITEMS
+    // FLAGS
     $showMemberMenu  = $isLoggedIn;
     $showAdminMenu   = $isAdmin;
     $showLoginButton = !$isLoggedIn;
