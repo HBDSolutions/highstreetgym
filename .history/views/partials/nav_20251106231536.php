@@ -67,7 +67,7 @@ $isAdmin     = $isAdmin    ?? ($userType === 'admin');
             <a class="nav-link <?php echo nav_active('/login_controller.php'); ?>" href="/highstreetgym/controllers/auth/login_controller.php">Login</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link <?php echo nav_active('/register_controller.php'); ?>" href="/highstreetgym/controllers/auth/register_controller.php">Register</a>
+            <a class="nav-link <?php echo nav_active('/register_controller.php', $currentPath); ?>" href="/highstreetgym/controllers/auth/register_controller.php">Register</a>
             </li>
         <?php endif; ?>
         </ul>
