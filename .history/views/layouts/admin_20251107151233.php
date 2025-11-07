@@ -1,5 +1,5 @@
 <?php
-// PREPARE NAVIGATION DATA
+// PREPARE NAVIGATION DATA FOR DUMB VIEW
 $navData = get_navigation_data();
 ?>
 

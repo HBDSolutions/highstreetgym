@@ -1,5 +1,5 @@
 <?php
-// PREPARE NAVIGATION DATA
+// PREPARE NAVIGATION DATA FOR DUMB VIEW
 $navData = get_navigation_data();
 ?>
 
@@ -17,7 +17,7 @@ $navData = get_navigation_data();
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/highstreetgym/assets/css/style.css">
     </head>
-    <body>
+    <body class="admin-layout">
         <!-- Admin Navigation -->
         <?php include __DIR__ . '/../partials/nav.php'; ?>
         
