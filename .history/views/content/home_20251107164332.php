@@ -1,5 +1,5 @@
 <!-- Home Content View -->
-<section class="container my-5">
+<main class="container my-5">
     
     <header class="text-center mb-5">
         <h1 class="display-4"><?= $welcomeMessage ?></h1>
@@ -41,7 +41,7 @@
         
         <article class="col-md-4">
             <div class="card h-100 text-center">
-                <img src="/highstreetgym/assets/img/schedule.jpg" class="card-img-top" alt="Flexible Schedule">
+                <img src="/highstreetgym/assets/img/flexible_schedule.jpg" class="card-img-top" alt="Flexible Schedule">
                 <div class="card-body">
                     <h2 class="h5">Flexible Schedule</h2>
                     <p>Classes 7 days a week to fit your lifestyle.</p>
@@ -51,7 +51,7 @@
         
         <article class="col-md-4">
             <div class="card h-100 text-center">
-                <img src="/highstreetgym/assets/img/programs.jpg" class="card-img-top" alt="Varied Programs">
+                <img src="/highstreetgym/assets/img/trainers.jpg" class="card-img-top" alt="Varied Programs">
                 <div class="card-body">
                     <h2 class="h5">Varied Programs</h2>
                     <p>From yoga to HIIT, find the perfect class for you.</p>
@@ -60,4 +60,4 @@
         </article>
     </section>
     
-        </section>
+</main>

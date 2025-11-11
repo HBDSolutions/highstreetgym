@@ -1,5 +1,6 @@
 <?php
 // NAV PARTIAL
+// INPUTS FROM BASE: $currentPath, $showMemberMenu, $showAdminMenu, $currentUser
 
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">

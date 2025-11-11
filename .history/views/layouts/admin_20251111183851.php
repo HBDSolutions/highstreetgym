@@ -1,6 +1,5 @@
 <?php
 // ADMIN LAYOUT CONTROLLER
-
 require_once __DIR__ . '/base_layout.php';
 $L = init_base_layout();
 $L['bodyClass'] = 'admin-layout';

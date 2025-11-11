@@ -10,7 +10,7 @@ function init_base_layout(): array {
     require_once __DIR__ . '/../../models/session.php';
     require_once __DIR__ . '/../../models/navigation.php';
 
-    // CURRENT USER
+    // CURRENT USER & PATH
     $currentUser = get_current_user_display();
     $currentPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
 
@@ -20,7 +20,7 @@ function init_base_layout(): array {
     $showMemberMenu = $isLoggedIn;
     $showAdminMenu  = $isAdmin;
 
-    // BODY CLASS
+    // BODY CLASS FOR LAYOUT STYLING
     $bodyClass = ($isAdmin ? 'admin-layout' : ($isLoggedIn ? 'member-layout' : 'public-layout'));
 
     return compact(

@@ -1,5 +1,5 @@
 <!-- Home Content View -->
-<section class="container my-5">
+<main class="container my-5">
     
     <header class="text-center mb-5">
         <h1 class="display-4"><?= $welcomeMessage ?></h1>
@@ -60,4 +60,4 @@
         </article>
     </section>
     
-        </section>
+</main>
