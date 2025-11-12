@@ -116,6 +116,13 @@ $navVars = get_navigation_data();
                 </div>
               <?php endif; ?>
 
+              <!-- RAW DATA (COLLAPSED) -->
+              <div class="mt-4">
+                <details>
+                  <summary class="btn btn-sm btn-outline-secondary">View Raw Report Data</summary>
+                  <pre class="mt-3 p-3 bg-light border rounded"><code><?= htmlspecialchars(json_encode($report, JSON_PRETTY_PRINT), ENT_QUOTES) ?></code></pre>
+                </details>
+              </div>
             </div>
           </div>
 

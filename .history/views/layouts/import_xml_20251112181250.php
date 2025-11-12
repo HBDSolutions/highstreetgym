@@ -34,6 +34,7 @@ $navVars = get_navigation_data();
       <header class="text-center mb-5">
           <h1 class="display-4">XML Import</h1>
           <p class="lead">Upload XML to add or update Members, Classes, or Schedules.</p>
+          <p class="text-muted">Files must pass DTD validation.</p>
       </header>
 
       <!-- IMPORT FORM -->

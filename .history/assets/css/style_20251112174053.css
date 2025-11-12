@@ -70,12 +70,6 @@ main.container {
   border-color: var(--hsg-secondary);
 }
 
-/* CARD IMAGES */
-.card-img-top {
-  height: 250px;
-  object-fit: cover;
-}
-
 /* TILE STYLES */
 .tile {
   display: inline-block;

@@ -4,7 +4,7 @@
         <div class="col-md-6 col-lg-4">
             <article class="card h-100 border-success">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
                         <h3 class="card-title mb-0">
                             <?= htmlspecialchars($booking['class_name']) ?>
                         </h3>

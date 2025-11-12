@@ -33,16 +33,3 @@ function get_navigation_data(): array {
         'currentPath'    => $currentPath,
     ];
 }
-
-// ACTIVE-LINK CHECK USING EXPLICIT PATH
-function is_navigation_active(string $needle, string $currentPath): string {
-    return str_ends_with($currentPath, $needle) ? 'active' : '';
-}
-
-// CANONICAL HELPER CALLED BY VIEWS/PARTIALS
-if (!function_exists('nav_active')) {
-    function nav_active(string $needle, ?string $currentPath = null): string {
-        $path = $currentPath ?? (parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/');
-        return (str_ends_with($path, $needle)) ? 'active' : '';
-    }
-}

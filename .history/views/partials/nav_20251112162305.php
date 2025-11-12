@@ -68,9 +68,7 @@ if (!function_exists('a')) {
                 <?= htmlspecialchars($userName) ?>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <?php if ($showMemberMenu && !$showAdminMenu): ?>
-                  <li><a class="dropdown-item" href="/highstreetgym/controllers/content/bookings_controller.php">My Bookings</a></li>
-                <?php endif; ?>
+                <li><a class="dropdown-item" href="/highstreetgym/controllers/content/bookings_controller.php">My Bookings</a></li>
                 <?php if ($showAdminMenu): ?>
                   <li><a class="dropdown-item" href="/highstreetgym/controllers/content/admin_controller.php">Admin Home</a></li>
                 <?php endif; ?>

@@ -51,13 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['last_name'] = $result['user']['last_name'];
             $_SESSION['user_type'] = $result['user']['user_type'];
             $_SESSION['logged_in'] = true;
-
-            // REDIRECT BASED ON USER TYPE
-            if ($result['user']['user_type'] === 'admin') {
-                $redirectUrl = '/highstreetgym/controllers/content/admin_controller.php';
-            } elseif (empty($_POST['redirect'])) {
-                $redirectUrl = '/highstreetgym/controllers/content/home_controller.php';
-            }            
             
             header('Location: ' . $redirectUrl);
             exit;

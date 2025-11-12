@@ -48,7 +48,7 @@ $navVars = get_navigation_data();
         <?php elseif (!empty($report)): ?>
           <!-- SUCCESS MESSAGE -->
           <div class="alert alert-success mb-4" role="alert">
-            <h4 class="alert-heading">Import Validated</h4>
+            <h4 class="alert-heading">Import Completed</h4>
           </div>
 
           <!-- REPORT DETAILS -->
@@ -58,33 +58,33 @@ $navVars = get_navigation_data();
             </div>
             
             <div class="card-body">
-              <table class="table">
+              <table class="table table-striped">
                 <tbody>
                   <?php if (isset($report['mode'])): ?>
                     <tr>
-                      <th scope="row" style="width: 40%;">Mode:</th>
-                      <td><?= htmlspecialchars($report['mode']) ?></td>
+                      <th scope="row" style="width: 40%;">Mode</th>
+                      <td><span class="badge bg-secondary"><?= htmlspecialchars($report['mode']) ?></span></td>
                     </tr>
                   <?php endif; ?>
                   
                   <?php if (isset($report['type'])): ?>
                     <tr>
-                      <th scope="row">Import Type:</th>
+                      <th scope="row">Import Type</th>
                       <td><?= htmlspecialchars(ucfirst($report['type'])) ?></td>
                     </tr>
                   <?php endif; ?>
                   
                   <?php if (isset($report['inserted'])): ?>
                     <tr>
-                      <th scope="row">Records Inserted:</th>
-                      <td><?= (int)$report['inserted'] ?></td>
+                      <th scope="row">Records Inserted</th>
+                      <td><span class="text-success fw-bold fs-5"><?= (int)$report['inserted'] ?></span></td>
                     </tr>
                   <?php endif; ?>
                   
                   <?php if (isset($report['updated'])): ?>
                     <tr>
-                      <th scope="row">Records Updated:</th>
-                      <td><?= (int)$report['updated'] ?></td>
+                      <th scope="row">Records Updated</th>
+                      <td><span class="text-info fw-bold fs-5"><?= (int)$report['updated'] ?></span></td>
                     </tr>
                   <?php endif; ?>
                 </tbody>
@@ -116,6 +116,13 @@ $navVars = get_navigation_data();
                 </div>
               <?php endif; ?>
 
+              <!-- RAW DATA (COLLAPSED) -->
+              <div class="mt-4">
+                <details>
+                  <summary class="btn btn-sm btn-outline-secondary">View Raw Report Data</summary>
+                  <pre class="mt-3 p-3 bg-light border rounded"><code><?= htmlspecialchars(json_encode($report, JSON_PRETTY_PRINT), ENT_QUOTES) ?></code></pre>
+                </details>
+              </div>
             </div>
           </div>
 

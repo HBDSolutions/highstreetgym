@@ -62,28 +62,28 @@ $navVars = get_navigation_data();
                 <tbody>
                   <?php if (isset($report['mode'])): ?>
                     <tr>
-                      <th scope="row" style="width: 40%;">Mode:</th>
+                      <th scope="row" style="width: 40%;">Mode</th>
                       <td><?= htmlspecialchars($report['mode']) ?></td>
                     </tr>
                   <?php endif; ?>
                   
                   <?php if (isset($report['type'])): ?>
                     <tr>
-                      <th scope="row">Import Type:</th>
+                      <th scope="row">Import Type</th>
                       <td><?= htmlspecialchars(ucfirst($report['type'])) ?></td>
                     </tr>
                   <?php endif; ?>
                   
                   <?php if (isset($report['inserted'])): ?>
                     <tr>
-                      <th scope="row">Records Inserted:</th>
+                      <th scope="row">Records Inserted</th>
                       <td><?= (int)$report['inserted'] ?></td>
                     </tr>
                   <?php endif; ?>
                   
                   <?php if (isset($report['updated'])): ?>
                     <tr>
-                      <th scope="row">Records Updated:</th>
+                      <th scope="row">Records Updated</th>
                       <td><?= (int)$report['updated'] ?></td>
                     </tr>
                   <?php endif; ?>
@@ -116,6 +116,13 @@ $navVars = get_navigation_data();
                 </div>
               <?php endif; ?>
 
+              <!-- RAW DATA (COLLAPSED) -->
+              <div class="mt-4">
+                <details>
+                  <summary class="btn btn-sm btn-outline-secondary">View Raw Report Data</summary>
+                  <pre class="mt-3 p-3 bg-light border rounded"><code><?= htmlspecialchars(json_encode($report, JSON_PRETTY_PRINT), ENT_QUOTES) ?></code></pre>
+                </details>
+              </div>
             </div>
           </div>
 

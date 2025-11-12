@@ -4,12 +4,10 @@
         <div class="col-md-6 col-lg-4">
             <article class="card h-100 border-success">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-0">
-                            <?= htmlspecialchars($booking['class_name']) ?>
-                        </h3>
+                    <h3 class="card-title">
+                        <?= htmlspecialchars($booking['class_name']) ?>
                         <span class="badge bg-success">Confirmed</span>
-                    </div>
+                    </h3>
                     
                     <p><strong>When:</strong> <?= htmlspecialchars($booking['day_of_week']) ?></p>
                     <p class="text-muted">
