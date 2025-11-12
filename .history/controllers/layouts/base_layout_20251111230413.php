@@ -16,10 +16,10 @@ function init_base_layout(): array {
     $currentUser = get_current_user_display();
     $currentPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
 
-    return [
+    return (
         'currentUser' => $currentUser,
         'currentPath' => $currentPath,
-    ];
+    );
 }
 
 // LAYOUT INVARIANTS: VALIDATE REQUIRED VARS

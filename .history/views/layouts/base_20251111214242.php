@@ -23,11 +23,7 @@ $pageTitle = $viewVars['title'] ?? 'High Street Gym';
   </header>
 
   <main class="flex-grow-1">
-    <?php
-      if (!empty($viewVars['contentView'])) {
-        include $viewVars['contentView'];
-      }
-    ?>
+    <?php include $contentView; ?>
   </main>
 
   <?php include __DIR__ . '/../partials/footer.php'; ?>

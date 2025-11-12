@@ -19,15 +19,23 @@ $pageTitle = $viewVars['title'] ?? 'High Street Gym';
 
 <body class="d-flex flex-column min-vh-100">
   <header>
-    <?php include __DIR__ . '/../partials/nav.php'; ?>
+    <?php
+      // Make nav helpers available and pass flags only (no logic in partial)
+      $currentPath   = $currentPath ?? ($_SERVER['REQUEST_URI'] ?? '/');
+      $isLoggedIn    = (bool)($isLoggedIn ?? (!empty($_SESSION['user_id'] ?? null)));
+      $userType      = $userType   ?? ($isLoggedIn ? ($_SESSION['user_type'] ?? 'member') : 'guest');
+      $currentUser   = $currentUser ?? [
+        'user_name' => trim(($_SESSION['first_name'] ?? '').' '.($_SESSION['last_name'] ?? ''))
+      ];
+      $showMemberMenu = $showMemberMenu ?? $isLoggedIn;
+      $showAdminMenu  = $showAdminMenu  ?? ($userType === 'admin');
+
+      include __DIR__ . '/../partials/nav.php';
+    ?>
   </header>
 
   <main class="flex-grow-1">
-    <?php
-      if (!empty($viewVars['contentView'])) {
-        include $viewVars['contentView'];
-      }
-    ?>
+    <?php include $contentView; ?>
   </main>
 
   <?php include __DIR__ . '/../partials/footer.php'; ?>
