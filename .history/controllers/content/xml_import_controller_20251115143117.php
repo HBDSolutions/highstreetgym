@@ -6,7 +6,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/../../models/upload_validation.php';
 
 class XmlImportController {
-
+    
     // GET IMPORT XML FILE
     public function showForm(): void
     {
@@ -44,11 +44,10 @@ class XmlImportController {
         $type = $_POST['import_type'] ?? '';
         $mode = $_POST['mode'] ?? 'insert';
 
-        // VALIDATE UPLOADED FILE
-        $validation = validate_xml_upload($_FILES['xml_file'] ?? null);
-        if (!$validation['valid']) {
+        // UPLOAD CHECK
+        if (!isset($_FILES['xml_file']) || $_FILES['xml_file']['error'] !== UPLOAD_ERR_OK) {
             http_response_code(400);
-            $error = $validation['error'];
+            $error = 'Upload failed or no file provided.';
             require __DIR__ . '/../../views/layouts/import_result.php';
             return;
         }
